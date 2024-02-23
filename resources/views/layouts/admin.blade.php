@@ -593,7 +593,9 @@
 
                     </div>
                     <!-- / Content -->
-
+                    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                     <!-- Footer -->
                     <footer class="content-footer footer bg-footer-theme">
                         <div class="container-xxl">

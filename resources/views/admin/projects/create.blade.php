@@ -7,8 +7,7 @@
 
         <div class="card-body">
             <form class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework" method="POST"
-                action="{{ route('admin.projects.store') }}"
-                enctype="multipart/form-data">
+                action="{{ route('admin.projects.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label class="required" for="title">{{ trans('cruds.project.fields.title') }}</label>
