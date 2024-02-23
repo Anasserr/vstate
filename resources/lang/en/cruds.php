@@ -676,8 +676,8 @@ return [
         ],
     ],
     'realEstateManagment' => [
-        'title'          => 'RealEstate Managment',
-        'title_singular' => 'RealEstate Managment',
+        'title'          => 'RealEstates',
+        'title_singular' => 'RealEstates',
     ],
     'project' => [
         'title'          => 'Projects',

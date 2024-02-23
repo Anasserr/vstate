@@ -151,10 +151,7 @@
                             <a href="{{ route('admin.projects.index') }}"
                                 class="menu-link {{ request()->is('admin/projects') || request()->is('admin/projects/*') ? 'c-active' : '' }}">
 
-                                <i class="  menu-icon fas fa-adjust">
 
-
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.project.title') }} ">
                                     {{ trans('cruds.project.title') }}
                                 </div>
@@ -165,10 +162,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.real-estate-units.index') }}"
                                 class="menu-link {{ request()->is('admin/real-estate-units') || request()->is('admin/real-estate-units/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-cogs">
 
-
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.realEstateUnit.title') }} ">
                                     {{ trans('cruds.realEstateUnit.title') }}
                                 </div>
@@ -179,9 +173,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.real-estate-types.index') }}"
                                 class="menu-link {{ request()->is('admin/real-estate-types') || request()->is('admin/real-estate-types/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.realEstateType.title') }} ">
                                     {{ trans('cruds.realEstateType.title') }}
                                 </div>
@@ -192,9 +184,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.views.index') }}"
                                 class="menu-link {{ request()->is('admin/views') || request()->is('admin/views/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.view.title') }} ">
                                     {{ trans('cruds.view.title') }}
                                 </div>
@@ -205,9 +195,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.finish-types.index') }}"
                                 class="menu-link {{ request()->is('admin/finish-types') || request()->is('admin/finish-types/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.finishType.title') }} ">
                                     {{ trans('cruds.finishType.title') }}
                                 </div>
@@ -218,9 +206,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.payment-methods.index') }}"
                                 class="menu-link {{ request()->is('admin/payment-methods') || request()->is('admin/payment-methods/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.paymentMethod.title') }} ">
                                     {{ trans('cruds.paymentMethod.title') }}
                                 </div>
@@ -231,9 +217,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.available-for-mortgages.index') }}"
                                 class="menu-link {{ request()->is('admin/available-for-mortgages') || request()->is('admin/available-for-mortgages/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.availableForMortgage.title') }} ">
                                     {{ trans('cruds.availableForMortgage.title') }}
                                 </div>
@@ -244,9 +228,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.realstate-purposes.index') }}"
                                 class="menu-link {{ request()->is('admin/realstate-purposes') || request()->is('admin/realstate-purposes/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.realstatePurpose.title') }} ">
                                     {{ trans('cruds.realstatePurpose.title') }}
                                 </div>
@@ -257,9 +239,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.amenities.index') }}"
                                 class="menu-link {{ request()->is('admin/amenities') || request()->is('admin/amenities/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-cogs">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.amenity.title') }} ">
                                     {{ trans('cruds.amenity.title') }}
                                 </div>
@@ -270,9 +250,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.nears.index') }}"
                                 class="menu-link {{ request()->is('admin/nears') || request()->is('admin/nears/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-cogs">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.near.title') }} ">
                                     {{ trans('cruds.near.title') }}
                                 </div>
@@ -283,9 +261,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.book-meetings.index') }}"
                                 class="menu-link {{ request()->is('admin/book-meetings') || request()->is('admin/book-meetings/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-cogs">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.bookMeeting.title') }} ">
                                     {{ trans('cruds.bookMeeting.title') }}
                                 </div>
@@ -296,9 +272,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.likes.index') }}"
                                 class="menu-link {{ request()->is('admin/likes') || request()->is('admin/likes/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.like.title') }} ">
                                     {{ trans('cruds.like.title') }}
                                 </div>
@@ -309,9 +283,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.unit-comments.index') }}"
                                 class="menu-link {{ request()->is('admin/unit-comments') || request()->is('admin/unit-comments/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.unitComment.title') }} ">
                                     {{ trans('cruds.unitComment.title') }}
                                 </div>
@@ -322,9 +294,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.project-types.index') }}"
                                 class="menu-link {{ request()->is('admin/project-types') || request()->is('admin/project-types/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.projectType.title') }} ">
                                     {{ trans('cruds.projectType.title') }}
                                 </div>
@@ -350,9 +320,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.events.index') }}"
                                 class="menu-link {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-cogs">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.event.title') }} ">
                                     {{ trans('cruds.event.title') }}
                                 </div>
@@ -363,9 +331,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.eventtags.index') }}"
                                 class="menu-link {{ request()->is('admin/eventtags') || request()->is('admin/eventtags/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-cogs">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.eventtag.title') }} ">
                                     {{ trans('cruds.eventtag.title') }}
                                 </div>
@@ -376,9 +342,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.event-categories.index') }}"
                                 class="menu-link {{ request()->is('admin/event-categories') || request()->is('admin/event-categories/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.eventCategory.title') }} ">
                                     {{ trans('cruds.eventCategory.title') }}
                                 </div>
@@ -389,9 +353,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.eventuserstatuses.index') }}"
                                 class="menu-link {{ request()->is('admin/eventuserstatuses') || request()->is('admin/eventuserstatuses/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.eventuserstatus.title') }} ">
                                     {{ trans('cruds.eventuserstatus.title') }}
                                 </div>
@@ -402,9 +364,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.eventjoiningusers.index') }}"
                                 class="menu-link {{ request()->is('admin/eventjoiningusers') || request()->is('admin/eventjoiningusers/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.eventjoininguser.title') }} ">
                                     {{ trans('cruds.eventjoininguser.title') }}
                                 </div>
@@ -415,9 +375,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.event-discussions.index') }}"
                                 class="menu-link {{ request()->is('admin/event-discussions') || request()->is('admin/event-discussions/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-cogs">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.eventDiscussion.title') }} ">
                                     {{ trans('cruds.eventDiscussion.title') }}
                                 </div>
@@ -443,9 +401,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.applications-request-sections.index') }}"
                                 class="menu-link {{ request()->is('admin/applications-request-sections') || request()->is('admin/applications-request-sections/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.applicationsRequestSection.title') }} ">
                                     {{ trans('cruds.applicationsRequestSection.title') }}
                                 </div>
@@ -456,9 +412,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.real-estate-applications.index') }}"
                                 class="menu-link {{ request()->is('admin/real-estate-applications') || request()->is('admin/real-estate-applications/*') ? 'c-active' : '' }}">
-                                <i class="  menu-icon fas fa-adjust">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.realEstateApplication.title') }} ">
                                     {{ trans('cruds.realEstateApplication.title') }}
                                 </div>
@@ -484,9 +438,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.countries.index') }}"
                                 class="menu-link {{ request()->is('admin/countries') || request()->is('admin/countries/*') ? 'c-active' : '' }}">
-                                <i class="fa-fw fas fa-flag c-sidebar-nav-icon">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.country.title') }} ">
                                     {{ trans('cruds.country.title') }}
                                 </div>
@@ -497,9 +449,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.cities.index') }}"
                                 class="menu-link {{ request()->is('admin/cities') || request()->is('admin/cities/*') ? 'c-active' : '' }}">
-                                <i class="fa-fw fas fa-at c-sidebar-nav-icon">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.city.title') }} ">
                                     {{ trans('cruds.city.title') }}
                                 </div>
@@ -510,9 +460,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.regions.index') }}"
                                 class="menu-link {{ request()->is('admin/regions') || request()->is('admin/regions/*') ? 'c-active' : '' }}">
-                                <i class="fa-fw fas fa-arrow-up c-sidebar-nav-icon">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.region.title') }} ">
                                     {{ trans('cruds.region.title') }}
                                 </div>
@@ -523,9 +471,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.pages.index') }}"
                                 class="menu-link {{ request()->is('admin/pages') || request()->is('admin/pages/*') ? 'c-active' : '' }}">
-                                <i class="fa-fw far fa-calendar-minus c-sidebar-nav-icon">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.page.title') }} ">
                                     {{ trans('cruds.page.title') }}
                                 </div>
@@ -536,9 +482,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.sliders.index') }}"
                                 class="menu-link {{ request()->is('admin/sliders') || request()->is('admin/sliders/*') ? 'c-active' : '' }}">
-                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.slider.title') }} ">
                                     {{ trans('cruds.slider.title') }}
                                 </div>
@@ -549,9 +493,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.services.index') }}"
                                 class="menu-link {{ request()->is('admin/services') || request()->is('admin/services/*') ? 'c-active' : '' }}">
-                                <i class="fa-fw fas fa-adjust c-sidebar-nav-icon">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.service.title') }} ">
                                     {{ trans('cruds.service.title') }}
                                 </div>
@@ -562,9 +504,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.contactus.index') }}"
                                 class="menu-link {{ request()->is('admin/contactus') || request()->is('admin/contactus/*') ? 'c-active' : '' }}">
-                                <i class="fa-fw fab fa-bandcamp c-sidebar-nav-icon">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.contactu.title') }} ">
                                     {{ trans('cruds.contactu.title') }}
                                 </div>
@@ -575,9 +515,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.settings.index') }}"
                                 class="menu-link {{ request()->is('admin/settings') || request()->is('admin/settings/*') ? 'c-active' : '' }}">
-                                <i class="fa-fw fas fa-adjust c-sidebar-nav-icon">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.setting.title') }} ">
                                     {{ trans('cruds.setting.title') }}
                                 </div>
@@ -588,9 +526,7 @@
                         <li class="menu-item ">
                             <a href="{{ route('admin.newsletters.index') }}"
                                 class="menu-link {{ request()->is('admin/newsletters') || request()->is('admin/newsletters/*') ? 'c-active' : '' }}">
-                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.newsletter.title') }} ">
                                     {{ trans('cruds.newsletter.title') }}
                                 </div>
@@ -646,9 +582,7 @@
                             class="menu-item  {{ request()->is('admin/content-categories') || request()->is('admin/content-categories/*') ? 'active' : '' }}  ">
                             <a href="{{ route('admin.content-categories.index') }}"
                                 class="menu-link {{ request()->is('admin/content-categories') || request()->is('admin/content-categories/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-folder">
 
-                                </i>
                                 <div data-i18n="   {{ trans('cruds.contentCategory.title') }} ">
                                     {{ trans('cruds.contentCategory.title') }}
                                 </div>
@@ -660,9 +594,7 @@
                             class="menu-item {{ request()->is('admin/content-tags') || request()->is('admin/content-tags/*') ? 'active' : '' }}  ">
                             <a href="{{ route('admin.content-tags.index') }}"
                                 class="menu-link {{ request()->is('admin/content-tags') || request()->is('admin/content-tags/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-tags">
 
-                                </i>
                                 <div data-i18n="   {{ trans('cruds.contentTag.title') }} ">
                                     {{ trans('cruds.contentTag.title') }}
                                 </div>
@@ -674,9 +606,7 @@
                             class="menu-item {{ request()->is('admin/content-pages') || request()->is('admin/content-pages/*') ? 'active' : '' }}  ">
                             <a href="{{ route('admin.content-pages.index') }}"
                                 class="menu-link {{ request()->is('admin/content-pages') || request()->is('admin/content-pages/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-file">
 
-                                </i>
                                 <div data-i18n="    {{ trans('cruds.contentPage.title') }} ">
                                     {{ trans('cruds.contentPage.title') }}
                                 </div>
