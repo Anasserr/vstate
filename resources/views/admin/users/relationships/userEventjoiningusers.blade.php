@@ -42,7 +42,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($eventjoiningusers as $key => $eventjoininguser)
+                    @foreach ($eventjoiningusers as $key => $eventjoininguser)
                         <tr data-entry-id="{{ $eventjoininguser->id }}">
                             <td>
 
@@ -52,7 +52,8 @@
                             </td>
                             <td>
                                 <span style="display:none">{{ $eventjoininguser->block ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $eventjoininguser->block ? 'checked' : '' }}>
+                                <input type="checkbox" disabled="disabled"
+                                    {{ $eventjoininguser->block ? 'checked' : '' }}>
                             </td>
                             <td>
                                 {{ $eventjoininguser->event->title ?? '' }}
@@ -65,22 +66,28 @@
                             </td>
                             <td>
                                 @can('eventjoininguser_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.eventjoiningusers.show', $eventjoininguser->id) }}">
+                                    <a class="btn btn-xs btn-primary"
+                                        href="{{ route('admin.eventjoiningusers.show', $eventjoininguser->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
                                 @can('eventjoininguser_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.eventjoiningusers.edit', $eventjoininguser->id) }}">
+                                    <a class="btn btn-xs btn-info"
+                                        href="{{ route('admin.eventjoiningusers.edit', $eventjoininguser->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
                                 @can('eventjoininguser_delete')
-                                    <form action="{{ route('admin.eventjoiningusers.destroy', $eventjoininguser->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <form class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework"
+                                        action="{{ route('admin.eventjoiningusers.destroy', $eventjoininguser->id) }}"
+                                        method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
+                                        style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <input type="submit" class="btn btn-xs btn-danger"
+                                            value="{{ trans('global.delete') }}">
                                     </form>
                                 @endcan
 
@@ -95,52 +102,65 @@
 </div>
 
 @section('scripts')
-@parent
-<script>
-    $(function () {
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('eventjoininguser_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-  let deleteButton = {
-    text: deleteButtonTrans,
-    url: "{{ route('admin.eventjoiningusers.massDestroy') }}",
-    className: 'btn-danger',
-    action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
-      });
+    @parent
+    <script>
+        $(function() {
+            let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+            @can('eventjoininguser_delete')
+                let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+                let deleteButton = {
+                    text: deleteButtonTrans,
+                    url: "{{ route('admin.eventjoiningusers.massDestroy') }}",
+                    className: 'btn-danger',
+                    action: function(e, dt, node, config) {
+                        var ids = $.map(dt.rows({
+                            selected: true
+                        }).nodes(), function(entry) {
+                            return $(entry).data('entry-id')
+                        });
 
-      if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
+                        if (ids.length === 0) {
+                            alert('{{ trans('global.datatables.zero_selected') }}')
 
-        return
-      }
+                            return
+                        }
 
-      if (confirm('{{ trans('global.areYouSure') }}')) {
-        $.ajax({
-          headers: {'x-csrf-token': _token},
-          method: 'POST',
-          url: config.url,
-          data: { ids: ids, _method: 'DELETE' }})
-          .done(function () { location.reload() })
-      }
-    }
-  }
-  dtButtons.push(deleteButton)
-@endcan
+                        if (confirm('{{ trans('global.areYouSure') }}')) {
+                            $.ajax({
+                                    headers: {
+                                        'x-csrf-token': _token
+                                    },
+                                    method: 'POST',
+                                    url: config.url,
+                                    data: {
+                                        ids: ids,
+                                        _method: 'DELETE'
+                                    }
+                                })
+                                .done(function() {
+                                    location.reload()
+                                })
+                        }
+                    }
+                }
+                dtButtons.push(deleteButton)
+            @endcan
 
-  $.extend(true, $.fn.dataTable.defaults, {
-    orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
-    pageLength: 100,
-  });
-  let table = $('.datatable-userEventjoiningusers:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-  $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
-      $($.fn.dataTable.tables(true)).DataTable()
-          .columns.adjust();
-  });
-  
-})
+            $.extend(true, $.fn.dataTable.defaults, {
+                orderCellsTop: true,
+                order: [
+                    [1, 'desc']
+                ],
+                pageLength: 100,
+            });
+            let table = $('.datatable-userEventjoiningusers:not(.ajaxTable)').DataTable({
+                buttons: dtButtons
+            })
+            $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e) {
+                $($.fn.dataTable.tables(true)).DataTable()
+                    .columns.adjust();
+            });
 
-</script>
+        })
+    </script>
 @endsection

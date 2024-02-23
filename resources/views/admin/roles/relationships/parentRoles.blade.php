@@ -45,7 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($roles as $key => $role)
+                    @foreach ($roles as $key => $role)
                         <tr data-entry-id="{{ $role->id }}">
                             <td>
 
@@ -57,7 +57,7 @@
                                 {{ $role->title ?? '' }}
                             </td>
                             <td>
-                                @foreach($role->permissions as $key => $item)
+                                @foreach ($role->permissions as $key => $item)
                                     <span class="badge badge-info">{{ $item->title }}</span>
                                 @endforeach
                             </td>
@@ -84,10 +84,14 @@
                                 @endcan
 
                                 @can('role_delete')
-                                    <form action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <form class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework"
+                                        action="{{ route('admin.roles.destroy', $role->id) }}" method="POST"
+                                        onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
+                                        style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <input type="submit" class="btn btn-xs btn-danger"
+                                            value="{{ trans('global.delete') }}">
                                     </form>
                                 @endcan
 
@@ -102,52 +106,65 @@
 </div>
 
 @section('scripts')
-@parent
-<script>
-    $(function () {
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('role_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-  let deleteButton = {
-    text: deleteButtonTrans,
-    url: "{{ route('admin.roles.massDestroy') }}",
-    className: 'btn-danger',
-    action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
-      });
+    @parent
+    <script>
+        $(function() {
+            let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+            @can('role_delete')
+                let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+                let deleteButton = {
+                    text: deleteButtonTrans,
+                    url: "{{ route('admin.roles.massDestroy') }}",
+                    className: 'btn-danger',
+                    action: function(e, dt, node, config) {
+                        var ids = $.map(dt.rows({
+                            selected: true
+                        }).nodes(), function(entry) {
+                            return $(entry).data('entry-id')
+                        });
 
-      if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
+                        if (ids.length === 0) {
+                            alert('{{ trans('global.datatables.zero_selected') }}')
 
-        return
-      }
+                            return
+                        }
 
-      if (confirm('{{ trans('global.areYouSure') }}')) {
-        $.ajax({
-          headers: {'x-csrf-token': _token},
-          method: 'POST',
-          url: config.url,
-          data: { ids: ids, _method: 'DELETE' }})
-          .done(function () { location.reload() })
-      }
-    }
-  }
-  dtButtons.push(deleteButton)
-@endcan
+                        if (confirm('{{ trans('global.areYouSure') }}')) {
+                            $.ajax({
+                                    headers: {
+                                        'x-csrf-token': _token
+                                    },
+                                    method: 'POST',
+                                    url: config.url,
+                                    data: {
+                                        ids: ids,
+                                        _method: 'DELETE'
+                                    }
+                                })
+                                .done(function() {
+                                    location.reload()
+                                })
+                        }
+                    }
+                }
+                dtButtons.push(deleteButton)
+            @endcan
 
-  $.extend(true, $.fn.dataTable.defaults, {
-    orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
-    pageLength: 100,
-  });
-  let table = $('.datatable-parentRoles:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-  $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
-      $($.fn.dataTable.tables(true)).DataTable()
-          .columns.adjust();
-  });
-  
-})
+            $.extend(true, $.fn.dataTable.defaults, {
+                orderCellsTop: true,
+                order: [
+                    [1, 'desc']
+                ],
+                pageLength: 100,
+            });
+            let table = $('.datatable-parentRoles:not(.ajaxTable)').DataTable({
+                buttons: dtButtons
+            })
+            $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e) {
+                $($.fn.dataTable.tables(true)).DataTable()
+                    .columns.adjust();
+            });
 
-</script>
+        })
+    </script>
 @endsection

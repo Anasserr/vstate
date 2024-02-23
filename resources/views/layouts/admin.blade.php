@@ -74,6 +74,11 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
     @yield('styles')
+    <style>
+        .btn {
+            margin: 5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -601,8 +606,8 @@
                                     </script>
                                     , made with ❤️
                                 </div>
-                                < </div>
                             </div>
+                        </div>
                     </footer>
                     <!-- / Footer -->
 

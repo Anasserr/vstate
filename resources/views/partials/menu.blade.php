@@ -57,12 +57,8 @@
 
 
 
-
-
-
-
         @can('user_management_access')
-            <li class="menu-item active open">
+
 
             <li
                 class="menu-item   {{ request()->is('admin/permissions*') ? 'active open' : '' }} {{ request()->is('admin/roles*') ? 'active open' : '' }} {{ request()->is('admin/users*') ? 'active open' : '' }} {{ request()->is('admin/audit-logs*') ? 'active open' : '' }} {{ request()->is('admin/company-services*') ? 'active open' : '' }}">
@@ -134,16 +130,203 @@
                             </a>
                         </li>
                     @endcan
-                    @can('company_service_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/company-services') || request()->is('admin/company-services/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.company-services.index') }}"
-                                class="menu-link {{ request()->is('admin/company-services') || request()->is('admin/company-services/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-volume-up">
+
+                </ul>
+            </li>
+        @endcan
+        @can('real_estate_managment_access')
+            <li
+                class="menu-item  {{ request()->is('admin/projects*') ? 'c-show' : '' }} {{ request()->is('admin/real-estate-units*') ? 'c-show' : '' }} {{ request()->is('admin/real-estate-types*') ? 'c-show' : '' }} {{ request()->is('admin/views*') ? 'c-show' : '' }} {{ request()->is('admin/finish-types*') ? 'c-show' : '' }} {{ request()->is('admin/payment-methods*') ? 'c-show' : '' }} {{ request()->is('admin/available-for-mortgages*') ? 'c-show' : '' }} {{ request()->is('admin/realstate-purposes*') ? 'c-show' : '' }} {{ request()->is('admin/amenities*') ? 'c-show' : '' }} {{ request()->is('admin/nears*') ? 'c-show' : '' }} {{ request()->is('admin/book-meetings*') ? 'c-show' : '' }} {{ request()->is('admin/likes*') ? 'c-show' : '' }} {{ request()->is('admin/unit-comments*') ? 'c-show' : '' }} {{ request()->is('admin/project-types*') ? 'c-show' : '' }}">
+                <a class="menu-link menu-toggle" href="#">
+                    <i class="menu-icon fas   fa-cogs  ">
+
+                    </i>
+                    <div data-i18n=" {{ trans('cruds.realEstateManagment.title') }}">
+                        {{ trans('cruds.realEstateManagment.title') }}
+                    </div>
+                </a>
+                <ul class="menu-sub">
+                    @can('project_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.projects.index') }}"
+                                class="menu-link {{ request()->is('admin/projects') || request()->is('admin/projects/*') ? 'c-active' : '' }}">
+
+                                <i class="  menu-icon fas fa-adjust">
+
 
                                 </i>
-                                <div data-i18n="   {{ trans('cruds.companyService.title') }} ">
-                                    {{ trans('cruds.companyService.title') }}
+                                <div data-i18n="    {{ trans('cruds.project.title') }} ">
+                                    {{ trans('cruds.project.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('real_estate_unit_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.real-estate-units.index') }}"
+                                class="menu-link {{ request()->is('admin/real-estate-units') || request()->is('admin/real-estate-units/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-cogs">
+
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.realEstateUnit.title') }} ">
+                                    {{ trans('cruds.realEstateUnit.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('real_estate_type_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.real-estate-types.index') }}"
+                                class="menu-link {{ request()->is('admin/real-estate-types') || request()->is('admin/real-estate-types/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.realEstateType.title') }} ">
+                                    {{ trans('cruds.realEstateType.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('view_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.views.index') }}"
+                                class="menu-link {{ request()->is('admin/views') || request()->is('admin/views/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.view.title') }} ">
+                                    {{ trans('cruds.view.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('finish_type_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.finish-types.index') }}"
+                                class="menu-link {{ request()->is('admin/finish-types') || request()->is('admin/finish-types/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.finishType.title') }} ">
+                                    {{ trans('cruds.finishType.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('payment_method_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.payment-methods.index') }}"
+                                class="menu-link {{ request()->is('admin/payment-methods') || request()->is('admin/payment-methods/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.paymentMethod.title') }} ">
+                                    {{ trans('cruds.paymentMethod.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('available_for_mortgage_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.available-for-mortgages.index') }}"
+                                class="menu-link {{ request()->is('admin/available-for-mortgages') || request()->is('admin/available-for-mortgages/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.availableForMortgage.title') }} ">
+                                    {{ trans('cruds.availableForMortgage.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('realstate_purpose_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.realstate-purposes.index') }}"
+                                class="menu-link {{ request()->is('admin/realstate-purposes') || request()->is('admin/realstate-purposes/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.realstatePurpose.title') }} ">
+                                    {{ trans('cruds.realstatePurpose.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('amenity_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.amenities.index') }}"
+                                class="menu-link {{ request()->is('admin/amenities') || request()->is('admin/amenities/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-cogs">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.amenity.title') }} ">
+                                    {{ trans('cruds.amenity.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('near_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.nears.index') }}"
+                                class="menu-link {{ request()->is('admin/nears') || request()->is('admin/nears/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-cogs">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.near.title') }} ">
+                                    {{ trans('cruds.near.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('book_meeting_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.book-meetings.index') }}"
+                                class="menu-link {{ request()->is('admin/book-meetings') || request()->is('admin/book-meetings/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-cogs">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.bookMeeting.title') }} ">
+                                    {{ trans('cruds.bookMeeting.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('like_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.likes.index') }}"
+                                class="menu-link {{ request()->is('admin/likes') || request()->is('admin/likes/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.like.title') }} ">
+                                    {{ trans('cruds.like.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('unit_comment_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.unit-comments.index') }}"
+                                class="menu-link {{ request()->is('admin/unit-comments') || request()->is('admin/unit-comments/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.unitComment.title') }} ">
+                                    {{ trans('cruds.unitComment.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('project_type_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.project-types.index') }}"
+                                class="menu-link {{ request()->is('admin/project-types') || request()->is('admin/project-types/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.projectType.title') }} ">
+                                    {{ trans('cruds.projectType.title') }}
                                 </div>
                             </a>
                         </li>
@@ -151,44 +334,92 @@
                 </ul>
             </li>
         @endcan
-        @can('port_info_access')
+        @can('event_management_access')
             <li
-                class="menu-item {{ request()->is('admin/ports*') ? 'active open' : '' }} {{ request()->is('admin/port-types*') ? 'active open' : '' }}">
-                <a class="menu-link menu-toggle {{ request()->is('admin/ports*') ? 'active' : '' }} {{ request()->is('admin/port-types*') ? 'active' : '' }}"
-                    href="#">
-                    <i class="menu-icon tf-icons fas fa-cogs">
+                class="menu-item  {{ request()->is('admin/events*') ? 'c-show' : '' }} {{ request()->is('admin/eventtags*') ? 'c-show' : '' }} {{ request()->is('admin/event-categories*') ? 'c-show' : '' }} {{ request()->is('admin/eventuserstatuses*') ? 'c-show' : '' }} {{ request()->is('admin/eventjoiningusers*') ? 'c-show' : '' }} {{ request()->is('admin/event-discussions*') ? 'c-show' : '' }}">
+                <a class="menu-link menu-toggle" href="#">
+                    <i class="  menu-icon fas fa-adjust">
 
                     </i>
-                    <div data-i18n="   {{ trans('cruds.portInfo.title') }} ">
-                        {{ trans('cruds.portInfo.title') }}
-
+                    <div data-i18n="    {{ trans('cruds.eventManagement.title') }} ">
+                        {{ trans('cruds.eventManagement.title') }}
                     </div>
                 </a>
                 <ul class="menu-sub">
-                    @can('port_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/ports') || request()->is('admin/ports/*') ? 'active' : '' }} ">
-                            <a href="{{ route('admin.ports.index') }}"
-                                class="menu-link {{ request()->is('admin/ports') || request()->is('admin/ports/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fab fa-docker">
+                    @can('event_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.events.index') }}"
+                                class="menu-link {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-cogs">
 
                                 </i>
-                                <div data-i18n="  {{ trans('cruds.port.title') }} ">
-                                    {{ trans('cruds.port.title') }}
+                                <div data-i18n="    {{ trans('cruds.event.title') }} ">
+                                    {{ trans('cruds.event.title') }}
                                 </div>
                             </a>
                         </li>
                     @endcan
-                    @can('port_type_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/port-types') || request()->is('admin/port-types/*') ? 'active' : '' }} ">
-                            <a href="{{ route('admin.port-types.index') }}"
-                                class="menu-link {{ request()->is('admin/port-types') || request()->is('admin/port-types/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-adjust">
+                    @can('eventtag_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.eventtags.index') }}"
+                                class="menu-link {{ request()->is('admin/eventtags') || request()->is('admin/eventtags/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-cogs">
 
                                 </i>
-                                <div data-i18n="   {{ trans('cruds.portType.title') }} ">
-                                    {{ trans('cruds.portType.title') }}
+                                <div data-i18n="    {{ trans('cruds.eventtag.title') }} ">
+                                    {{ trans('cruds.eventtag.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('event_category_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.event-categories.index') }}"
+                                class="menu-link {{ request()->is('admin/event-categories') || request()->is('admin/event-categories/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.eventCategory.title') }} ">
+                                    {{ trans('cruds.eventCategory.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('eventuserstatus_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.eventuserstatuses.index') }}"
+                                class="menu-link {{ request()->is('admin/eventuserstatuses') || request()->is('admin/eventuserstatuses/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.eventuserstatus.title') }} ">
+                                    {{ trans('cruds.eventuserstatus.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('eventjoininguser_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.eventjoiningusers.index') }}"
+                                class="menu-link {{ request()->is('admin/eventjoiningusers') || request()->is('admin/eventjoiningusers/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.eventjoininguser.title') }} ">
+                                    {{ trans('cruds.eventjoininguser.title') }}
+                                </div>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('event_discussion_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.event-discussions.index') }}"
+                                class="menu-link {{ request()->is('admin/event-discussions') || request()->is('admin/event-discussions/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-cogs">
+
+                                </i>
+                                <div data-i18n="    {{ trans('cruds.eventDiscussion.title') }} ">
+                                    {{ trans('cruds.eventDiscussion.title') }}
                                 </div>
                             </a>
                         </li>
@@ -196,319 +427,40 @@
                 </ul>
             </li>
         @endcan
-        @can('products_info_access')
+        @can('form_request_access')
             <li
-                class="menu-item {{ request()->is('admin/products*') ? 'active open' : '' }} {{ request()->is('admin/product-types*') ? 'active open' : '' }} {{ request()->is('admin/product-imo-classes*') ? 'active open' : '' }}">
-                <a class="menu-link menu-toggle {{ request()->is('admin/products*') ? 'active' : '' }} {{ request()->is('admin/product-types*') ? 'active' : '' }} {{ request()->is('admin/product-imo-classes*') ? 'active' : '' }}"
-                    href="#">
-                    <i class="menu-icon tf-icons fas fa-align-left">
+                class="menu-item  {{ request()->is('admin/applications-request-sections*') ? 'c-show' : '' }} {{ request()->is('admin/real-estate-applications*') ? 'c-show' : '' }}">
+                <a class="menu-link menu-toggle" href="#">
+                    <i class="  menu-icon fas fa-cogs">
 
                     </i>
-                    <div data-i18n="   {{ trans('cruds.productsInfo.title') }}">
-                        {{ trans('cruds.productsInfo.title') }}
-
+                    <div data-i18n="    {{ trans('cruds.formRequest.title') }} ">
+                        {{ trans('cruds.formRequest.title') }}
                     </div>
                 </a>
                 <ul class="menu-sub">
-                    @can('product_access')
-                        <li
-                            class="menu-item {{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }} ">
-                            <a href="{{ route('admin.products.index') }}"
-                                class="menu-link {{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-award">
+                    @can('applications_request_section_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.applications-request-sections.index') }}"
+                                class="menu-link {{ request()->is('admin/applications-request-sections') || request()->is('admin/applications-request-sections/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
 
                                 </i>
-                                <div data-i18n="   {{ trans('cruds.product.title') }} ">
-                                    {{ trans('cruds.product.title') }}
+                                <div data-i18n="    {{ trans('cruds.applicationsRequestSection.title') }} ">
+                                    {{ trans('cruds.applicationsRequestSection.title') }}
                                 </div>
                             </a>
                         </li>
                     @endcan
-                    @can('product_type_access')
-                        <li
-                            class="menu-item {{ request()->is('admin/product-types') || request()->is('admin/product-types/*') ? 'active' : '' }}  ">
-                            <a href="{{ route('admin.product-types.index') }}"
-                                class="menu-link {{ request()->is('admin/product-types') || request()->is('admin/product-types/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-angle-double-right">
+                    @can('real_estate_application_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.real-estate-applications.index') }}"
+                                class="menu-link {{ request()->is('admin/real-estate-applications') || request()->is('admin/real-estate-applications/*') ? 'c-active' : '' }}">
+                                <i class="  menu-icon fas fa-adjust">
 
                                 </i>
-                                <div data-i18n="   {{ trans('cruds.productType.title') }}">
-                                    {{ trans('cruds.productType.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('product_imo_class_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/product-imo-classes') || request()->is('admin/product-imo-classes/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.product-imo-classes.index') }}"
-                                class="menu-link {{ request()->is('admin/product-imo-classes') || request()->is('admin/product-imo-classes/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fab fa-accusoft">
-
-                                </i>
-                                <div data-i18n="   {{ trans('cruds.productImoClass.title') }} ">
-                                    {{ trans('cruds.productImoClass.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                </ul>
-            </li>
-        @endcan
-        @can('requests_info_access')
-            <li
-                class="menu-item {{ request()->is('admin/booking-requests*') ? 'active open' : '' }} {{ request()->is('admin/offers*') ? 'active open' : '' }} {{ request()->is('admin/request-statuses*') ? 'active open' : '' }} {{ request()->is('admin/request-services*') ? 'active open' : '' }} {{ request()->is('admin/requester-user-informations*') ? 'active open' : '' }} {{ request()->is('admin/requester-user-types*') ? 'active open' : '' }}">
-                <a class="menu-link menu-toggle {{ request()->is('admin/booking-requests*') ? 'active' : '' }} {{ request()->is('admin/offers*') ? 'active' : '' }} {{ request()->is('admin/request-statuses*') ? 'active' : '' }} {{ request()->is('admin/request-services*') ? 'active' : '' }} {{ request()->is('admin/requester-user-informations*') ? 'active' : '' }} {{ request()->is('admin/requester-user-types*') ? 'active' : '' }}"
-                    href="#">
-                    <i class="menu-icon tf-icons fas fa-anchor">
-
-                    </i>
-                    <div data-i18n="   {{ trans('cruds.requestsInfo.title') }}">
-                        {{ trans('cruds.requestsInfo.title') }}
-
-                    </div>
-                </a>
-                <ul class="menu-sub">
-                    @can('booking_request_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/booking-requests') || request()->is('admin/booking-requests/*') ? 'active' : '' }} ">
-                            <a href="{{ route('admin.booking-requests.index') }}"
-                                class="menu-link {{ request()->is('admin/booking-requests') || request()->is('admin/booking-requests/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fab fa-bitbucket">
-
-                                </i>
-                                <div data-i18n="  {{ trans('cruds.bookingRequest.title') }} ">
-                                    {{ trans('cruds.bookingRequest.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('offer_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/offers') || request()->is('admin/offers/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.offers.index') }}"
-                                class="menu-link {{ request()->is('admin/offers') || request()->is('admin/offers/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-allergies">
-
-                                </i>
-                                <div data-i18n="  {{ trans('cruds.offer.title') }} ">
-                                    {{ trans('cruds.offer.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('request_status_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/request-statuses') || request()->is('admin/request-statuses/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.request-statuses.index') }}"
-                                class="menu-link {{ request()->is('admin/request-statuses') || request()->is('admin/request-statuses/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-anchor">
-
-                                </i>
-                                <div data-i18n="   {{ trans('cruds.requestStatus.title') }}">
-                                    {{ trans('cruds.requestStatus.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('request_service_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/request-services') || request()->is('admin/request-services/*') ? 'active' : '' }} ">
-                            <a href="{{ route('admin.request-services.index') }}"
-                                class="menu-link {{ request()->is('admin/request-services') || request()->is('admin/request-services/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-cogs">
-
-                                </i>
-                                <div data-i18n="  {{ trans('cruds.requestService.title') }} ">
-                                    {{ trans('cruds.requestService.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('requester_user_information_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/requester-user-informations') || request()->is('admin/requester-user-informations/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.requester-user-informations.index') }}"
-                                class="menu-link {{ request()->is('admin/requester-user-informations') || request()->is('admin/requester-user-informations/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-cogs">
-
-                                </i>
-                                <div data-i18n="  {{ trans('cruds.requesterUserInformation.title') }} ">
-                                    {{ trans('cruds.requesterUserInformation.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('requester_user_type_access')
-                        <li
-                            class="menu-item   {{ request()->is('admin/requester-user-types') || request()->is('admin/requester-user-types/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.requester-user-types.index') }}"
-                                class="menu-link {{ request()->is('admin/requester-user-types') || request()->is('admin/requester-user-types/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-adjust">
-
-                                </i>
-                                <div data-i18n="  {{ trans('cruds.requesterUserType.title') }}">
-                                    {{ trans('cruds.requesterUserType.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                </ul>
-            </li>
-        @endcan
-        @can('bookings_info_access')
-            <li
-                class="menu-item {{ request()->is('admin/booking-statuses*') ? 'active open' : '' }} {{ request()->is('admin/bookings*') ? 'active open' : '' }} {{ request()->is('admin/requester-type-informations*') ? 'active open' : '' }}">
-                <a class="menu-link menu-toggle {{ request()->is('admin/booking-statuses*') ? 'active' : '' }} {{ request()->is('admin/bookings*') ? 'active' : '' }} {{ request()->is('admin/requester-type-informations*') ? 'active' : '' }}"
-                    href="#">
-                    <i class="menu-icon tf-icons fab fa-500px">
-
-                    </i>
-                    <div data-i18n="    {{ trans('cruds.bookingsInfo.title') }} ">
-                        {{ trans('cruds.bookingsInfo.title') }}
-
-                    </div>
-                </a>
-                <ul class="menu-sub">
-                    @can('booking_status_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/booking-statuses') || request()->is('admin/booking-statuses/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.booking-statuses.index') }}"
-                                class="menu-link {{ request()->is('admin/booking-statuses') || request()->is('admin/booking-statuses/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-anchor">
-
-                                </i>
-                                <div data-i18n="  {{ trans('cruds.bookingStatus.title') }} ">
-                                    {{ trans('cruds.bookingStatus.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('booking_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/bookings') || request()->is('admin/bookings/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.bookings.index') }}"
-                                class="menu-link {{ request()->is('admin/bookings') || request()->is('admin/bookings/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fab fa-bitbucket">
-
-                                </i>
-                                <div data-i18n="    {{ trans('cruds.booking.title') }} ">
-                                    {{ trans('cruds.booking.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('requester_type_information_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/requester-type-informations') || request()->is('admin/requester-type-informations/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.requester-type-informations.index') }}"
-                                class="menu-link {{ request()->is('admin/requester-type-informations') || request()->is('admin/requester-type-informations/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-cogs">
-
-                                </i>
-                                <div data-i18n="    {{ trans('cruds.requesterTypeInformation.title') }} ">
-                                    {{ trans('cruds.requesterTypeInformation.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                </ul>
-            </li>
-        @endcan
-        @can('companies_info_access')
-            <li
-                class="menu-item {{ request()->is('admin/companies*') ? 'active open' : '' }} {{ request()->is('admin/companies-lines*') ? 'active open' : '' }} {{ request()->is('admin/company-types*') ? 'active open' : '' }} {{ request()->is('admin/ratings*') ? 'active open' : '' }} {{ request()->is('admin/companystatuses*') ? 'active open' : '' }} {{ request()->is('admin/company-lines-statuses*') ? 'active open' : '' }}">
-                <a class="menu-link menu-toggle {{ request()->is('admin/companies*') ? 'active' : '' }} {{ request()->is('admin/companies-lines*') ? 'active' : '' }} {{ request()->is('admin/company-types*') ? 'active' : '' }} {{ request()->is('admin/ratings*') ? 'active' : '' }} {{ request()->is('admin/companystatuses*') ? 'active' : '' }} {{ request()->is('admin/company-lines-statuses*') ? 'active' : '' }}"
-                    href="#">
-                    <i class="menu-icon tf-icons fas fa-angle-double-up">
-
-                    </i>
-                    <div data-i18n="     {{ trans('cruds.companiesInfo.title') }} ">
-                        {{ trans('cruds.companiesInfo.title') }}
-
-                    </div>
-                </a>
-                <ul class="menu-sub">
-                    @can('company_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/companies') || request()->is('admin/companies/*') ? 'active' : '' }} ">
-                            <a href="{{ route('admin.companies.index') }}"
-                                class="menu-link {{ request()->is('admin/companies') || request()->is('admin/companies/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-arrow-alt-circle-up">
-
-                                </i>
-                                <div data-i18n="     {{ trans('cruds.company.title') }} ">
-                                    {{ trans('cruds.company.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('companies_line_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/companies-lines') || request()->is('admin/companies-lines/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.companies-lines.index') }}"
-                                class="menu-link {{ request()->is('admin/companies-lines') || request()->is('admin/companies-lines/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-archway">
-
-                                </i>
-                                <div data-i18n="   {{ trans('cruds.companiesLine.title') }} ">
-                                    {{ trans('cruds.companiesLine.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('company_type_access')
-                        <li
-                            class="menu-item   {{ request()->is('admin/company-types') || request()->is('admin/company-types/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.company-types.index') }}"
-                                class="menu-link {{ request()->is('admin/company-types') || request()->is('admin/company-types/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons far fa-bookmark">
-
-                                </i>
-                                <div data-i18n="  {{ trans('cruds.companyType.title') }} ">
-                                    {{ trans('cruds.companyType.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('rating_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/ratings') || request()->is('admin/ratings/*') ? 'active' : '' }} ">
-                            <a href="{{ route('admin.ratings.index') }}"
-                                class="menu-link {{ request()->is('admin/ratings') || request()->is('admin/ratings/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-battery-three-quarters">
-
-                                </i>
-                                <div data-i18n="    {{ trans('cruds.rating.title') }} ">
-                                    {{ trans('cruds.rating.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('companystatus_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/companystatuses') || request()->is('admin/companystatuses/*') ? 'active' : '' }} ">
-                            <a href="{{ route('admin.companystatuses.index') }}"
-                                class="menu-link {{ request()->is('admin/companystatuses') || request()->is('admin/companystatuses/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-cogs">
-
-                                </i>
-                                <div data-i18n="   {{ trans('cruds.companystatus.title') }} ">
-                                    {{ trans('cruds.companystatus.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('company_lines_status_access')
-                        <li
-                            class="menu-item   {{ request()->is('admin/company-lines-statuses') || request()->is('admin/company-lines-statuses/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.company-lines-statuses.index') }}"
-                                class="menu-link {{ request()->is('admin/company-lines-statuses') || request()->is('admin/company-lines-statuses/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-bolt">
-
-                                </i>
-                                <div data-i18n="   {{ trans('cruds.companyLinesStatus.title') }} ">
-                                    {{ trans('cruds.companyLinesStatus.title') }}
+                                <div data-i18n="    {{ trans('cruds.realEstateApplication.title') }} ">
+                                    {{ trans('cruds.realEstateApplication.title') }}
                                 </div>
                             </a>
                         </li>
@@ -518,241 +470,129 @@
         @endcan
         @can('info_access')
             <li
-                class="menu-item {{ request()->is('admin/services*') ? 'active open' : '' }} {{ request()->is('admin/countries*') ? 'active open' : '' }} {{ request()->is('admin/cities*') ? 'active open' : '' }} {{ request()->is('admin/regions*') ? 'active open' : '' }} {{ request()->is('admin/pages*') ? 'active open' : '' }}">
-                <a class="menu-link menu-toggle {{ request()->is('admin/services*') ? 'active' : '' }} {{ request()->is('admin/countries*') ? 'active' : '' }} {{ request()->is('admin/cities*') ? 'active' : '' }} {{ request()->is('admin/regions*') ? 'active' : '' }} {{ request()->is('admin/pages*') ? 'active' : '' }}"
-                    href="#">
-                    <i class="menu-icon tf-icons fas fa-align-right">
+                class="menu-item  {{ request()->is('admin/countries*') ? 'c-show' : '' }} {{ request()->is('admin/cities*') ? 'c-show' : '' }} {{ request()->is('admin/regions*') ? 'c-show' : '' }} {{ request()->is('admin/pages*') ? 'c-show' : '' }} {{ request()->is('admin/sliders*') ? 'c-show' : '' }} {{ request()->is('admin/services*') ? 'c-show' : '' }} {{ request()->is('admin/contactus*') ? 'c-show' : '' }} {{ request()->is('admin/settings*') ? 'c-show' : '' }} {{ request()->is('admin/newsletters*') ? 'c-show' : '' }}">
+                <a class="menu-link menu-toggle" href="#">
+                    <i class="  menu-icon fas fa-adjust">
 
                     </i>
-                    <div data-i18n="  {{ trans('cruds.info.title') }}">
+                    <div data-i18n="    {{ trans('cruds.info.title') }} ">
                         {{ trans('cruds.info.title') }}
                     </div>
                 </a>
                 <ul class="menu-sub">
-                    @can('service_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/services') || request()->is('admin/services/*') ? 'active' : '' }} ">
-                            <a href="{{ route('admin.services.index') }}"
-                                class="menu-link {{ request()->is('admin/services') || request()->is('admin/services/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-american-sign-language-interpreting">
-
-                                </i>
-                                <div data-i18n="   {{ trans('cruds.service.title') }}">
-                                    {{ trans('cruds.service.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
                     @can('country_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/countries') || request()->is('admin/countries/*') ? 'active' : '' }}">
+                        <li class="menu-item ">
                             <a href="{{ route('admin.countries.index') }}"
-                                class="menu-link {{ request()->is('admin/countries') || request()->is('admin/countries/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-flag">
+                                class="menu-link {{ request()->is('admin/countries') || request()->is('admin/countries/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fas fa-flag c-sidebar-nav-icon">
 
                                 </i>
-                                <div data-i18n="   {{ trans('cruds.country.title') }} ">
+                                <div data-i18n="    {{ trans('cruds.country.title') }} ">
                                     {{ trans('cruds.country.title') }}
                                 </div>
                             </a>
                         </li>
                     @endcan
                     @can('city_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/cities') || request()->is('admin/cities/*') ? 'active' : '' }}">
+                        <li class="menu-item ">
                             <a href="{{ route('admin.cities.index') }}"
-                                class="menu-link {{ request()->is('admin/cities') || request()->is('admin/cities/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-at">
+                                class="menu-link {{ request()->is('admin/cities') || request()->is('admin/cities/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fas fa-at c-sidebar-nav-icon">
 
                                 </i>
-                                <div data-i18n="  {{ trans('cruds.city.title') }} ">
+                                <div data-i18n="    {{ trans('cruds.city.title') }} ">
                                     {{ trans('cruds.city.title') }}
                                 </div>
                             </a>
                         </li>
                     @endcan
                     @can('region_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/regions') || request()->is('admin/regions/*') ? 'active' : '' }} ">
+                        <li class="menu-item ">
                             <a href="{{ route('admin.regions.index') }}"
-                                class="menu-link {{ request()->is('admin/regions') || request()->is('admin/regions/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-arrow-up">
+                                class="menu-link {{ request()->is('admin/regions') || request()->is('admin/regions/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fas fa-arrow-up c-sidebar-nav-icon">
 
                                 </i>
-                                <div data-i18n="   {{ trans('cruds.region.title') }}">
+                                <div data-i18n="    {{ trans('cruds.region.title') }} ">
                                     {{ trans('cruds.region.title') }}
                                 </div>
                             </a>
                         </li>
                     @endcan
                     @can('page_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/pages') || request()->is('admin/pages/*') ? 'active' : '' }}">
+                        <li class="menu-item ">
                             <a href="{{ route('admin.pages.index') }}"
-                                class="menu-link {{ request()->is('admin/pages') || request()->is('admin/pages/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons far fa-calendar-minus">
+                                class="menu-link {{ request()->is('admin/pages') || request()->is('admin/pages/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw far fa-calendar-minus c-sidebar-nav-icon">
 
                                 </i>
-                                <div data-i18n="  {{ trans('cruds.page.title') }}">
+                                <div data-i18n="    {{ trans('cruds.page.title') }} ">
                                     {{ trans('cruds.page.title') }}
                                 </div>
                             </a>
                         </li>
                     @endcan
-                </ul>
-            </li>
-        @endcan
-        @can('contactu_access')
-            <li
-                class="menu-item  {{ request()->is('admin/contactus') || request()->is('admin/contactus/*') ? 'active' : '' }}">
-                <a href="{{ route('admin.contactus.index') }}"
-                    class="menu-link {{ request()->is('admin/contactus') || request()->is('admin/contactus/*') ? 'active' : '' }}">
-                    <i class="menu-icon tf-icons fab fa-bandcamp">
-
-                    </i>
-                    <div data-i18n="   {{ trans('cruds.contactu.title') }} ">
-                        {{ trans('cruds.contactu.title') }}
-                    </div>
-                </a>
-            </li>
-        @endcan
-        @can('setting_access')
-            <li
-                class="menu-item  {{ request()->is('admin/settings') || request()->is('admin/settings/*') ? 'active' : '' }}">
-                <a href="{{ route('admin.settings.index') }}"
-                    class="menu-link {{ request()->is('admin/settings') || request()->is('admin/settings/*') ? 'active' : '' }}">
-                    <i class="menu-icon tf-icons fas fa-adjust">
-
-                    </i>
-                    <div data-i18n="  {{ trans('cruds.setting.title') }} ">
-                        {{ trans('cruds.setting.title') }}
-                    </div>
-                </a>
-            </li>
-        @endcan
-        @can('look_up_table_access')
-            <li
-                class="menu-item {{ request()->is('admin/transportation-types*') ? 'active open' : '' }} {{ request()->is('admin/uld-container-types*') ? 'active open' : '' }} {{ request()->is('admin/delivery-types*') ? 'active open' : '' }} {{ request()->is('admin/associated-services*') ? 'active open' : '' }} {{ request()->is('admin/truck-types*') ? 'active open' : '' }} {{ request()->is('admin/ship-types*') ? 'active open' : '' }} {{ request()->is('admin/material-types*') ? 'active open' : '' }} {{ request()->is('admin/dimensions-types*') ? 'active open' : '' }}">
-                <a class="menu-link menu-toggle {{ request()->is('admin/transportation-types*') ? 'active' : '' }} {{ request()->is('admin/uld-container-types*') ? 'active' : '' }} {{ request()->is('admin/delivery-types*') ? 'active' : '' }} {{ request()->is('admin/associated-services*') ? 'active' : '' }} {{ request()->is('admin/truck-types*') ? 'active' : '' }} {{ request()->is('admin/ship-types*') ? 'active' : '' }} {{ request()->is('admin/material-types*') ? 'active' : '' }} {{ request()->is('admin/dimensions-types*') ? 'active' : '' }}"
-                    href="#">
-                    <i class="menu-icon tf-icons fas fa-deaf">
-
-                    </i>
-                    <div data-i18n="     {{ trans('cruds.lookUpTable.title') }} ">
-                        {{ trans('cruds.lookUpTable.title') }}
-
-                    </div>
-                </a>
-                <ul class="menu-sub">
-                    @can('transportation_type_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/transportation-types') || request()->is('admin/transportation-types/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.transportation-types.index') }}"
-                                class="menu-link {{ request()->is('admin/transportation-types') || request()->is('admin/transportation-types/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-volume-up">
+                    @can('slider_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.sliders.index') }}"
+                                class="menu-link {{ request()->is('admin/sliders') || request()->is('admin/sliders/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
 
                                 </i>
-                                <div data-i18n="   {{ trans('cruds.transportationType.title') }}">
-                                    {{ trans('cruds.transportationType.title') }}
+                                <div data-i18n="    {{ trans('cruds.slider.title') }} ">
+                                    {{ trans('cruds.slider.title') }}
                                 </div>
                             </a>
                         </li>
                     @endcan
-                    @can('uld_container_type_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/uld-container-types') || request()->is('admin/uld-container-types/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.uld-container-types.index') }}"
-                                class="menu-link {{ request()->is('admin/uld-container-types') || request()->is('admin/uld-container-types/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-bus">
+                    @can('service_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.services.index') }}"
+                                class="menu-link {{ request()->is('admin/services') || request()->is('admin/services/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fas fa-adjust c-sidebar-nav-icon">
 
                                 </i>
-                                <div data-i18n="  {{ trans('cruds.uldContainerType.title') }} ">
-                                    {{ trans('cruds.uldContainerType.title') }}
+                                <div data-i18n="    {{ trans('cruds.service.title') }} ">
+                                    {{ trans('cruds.service.title') }}
                                 </div>
                             </a>
                         </li>
                     @endcan
-                    @can('delivery_type_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/delivery-types') || request()->is('admin/delivery-types/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.delivery-types.index') }}"
-                                class="menu-link {{ request()->is('admin/delivery-types') || request()->is('admin/delivery-types/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-bus-alt">
+                    @can('contactu_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.contactus.index') }}"
+                                class="menu-link {{ request()->is('admin/contactus') || request()->is('admin/contactus/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fab fa-bandcamp c-sidebar-nav-icon">
 
                                 </i>
-                                <div data-i18n="   {{ trans('cruds.deliveryType.title') }} ">
-                                    {{ trans('cruds.deliveryType.title') }}
+                                <div data-i18n="    {{ trans('cruds.contactu.title') }} ">
+                                    {{ trans('cruds.contactu.title') }}
                                 </div>
                             </a>
                         </li>
                     @endcan
-                    @can('associated_service_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/associated-services') || request()->is('admin/associated-services/*') ? 'active' : '' }} ">
-                            <a href="{{ route('admin.associated-services.index') }}"
-                                class="menu-link {{ request()->is('admin/associated-services') || request()->is('admin/associated-services/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fab fa-affiliatetheme">
+                    @can('setting_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.settings.index') }}"
+                                class="menu-link {{ request()->is('admin/settings') || request()->is('admin/settings/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fas fa-adjust c-sidebar-nav-icon">
 
                                 </i>
-                                <div data-i18n="    {{ trans('cruds.associatedService.title') }} ">
-                                    {{ trans('cruds.associatedService.title') }}
+                                <div data-i18n="    {{ trans('cruds.setting.title') }} ">
+                                    {{ trans('cruds.setting.title') }}
                                 </div>
                             </a>
                         </li>
                     @endcan
-                    @can('truck_type_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/truck-types') || request()->is('admin/truck-types/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.truck-types.index') }}"
-                                class="menu-link {{ request()->is('admin/truck-types') || request()->is('admin/truck-types/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-bus">
+                    @can('newsletter_access')
+                        <li class="menu-item ">
+                            <a href="{{ route('admin.newsletters.index') }}"
+                                class="menu-link {{ request()->is('admin/newsletters') || request()->is('admin/newsletters/*') ? 'c-active' : '' }}">
+                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
 
                                 </i>
-                                <div data-i18n="    {{ trans('cruds.truckType.title') }}">
-                                    {{ trans('cruds.truckType.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('ship_type_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/ship-types') || request()->is('admin/ship-types/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.ship-types.index') }}"
-                                class="menu-link {{ request()->is('admin/ship-types') || request()->is('admin/ship-types/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-bullseye">
-
-                                </i>
-                                <div data-i18n="   {{ trans('cruds.shipType.title') }}">
-                                    {{ trans('cruds.shipType.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('material_type_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/material-types') || request()->is('admin/material-types/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.material-types.index') }}"
-                                class="menu-link {{ request()->is('admin/material-types') || request()->is('admin/material-types/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-angle-double-right">
-
-                                </i>
-                                <div data-i18n=" {{ trans('cruds.materialType.title') }}
-                                ">
-                                    {{ trans('cruds.materialType.title') }}
-                                </div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('dimensions_type_access')
-                        <li
-                            class="menu-item  {{ request()->is('admin/dimensions-types') || request()->is('admin/dimensions-types/*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.dimensions-types.index') }}"
-                                class="menu-link {{ request()->is('admin/dimensions-types') || request()->is('admin/dimensions-types/*') ? 'active' : '' }}">
-                                <i class="menu-icon tf-icons fas fa-angle-double-right">
-
-                                </i>
-                                <div data-i18n="   {{ trans('cruds.dimensionsType.title') }} ">
-                                    {{ trans('cruds.dimensionsType.title') }}
+                                <div data-i18n="    {{ trans('cruds.newsletter.title') }} ">
+                                    {{ trans('cruds.newsletter.title') }}
                                 </div>
                             </a>
                         </li>
@@ -761,29 +601,14 @@
             </li>
         @endcan
         @can('testimonial_access')
-            <li
-                class="menu-item   {{ request()->is('admin/testimonials') || request()->is('admin/testimonials/*') ? 'active' : '' }}">
+            <li class="menu-item ">
                 <a href="{{ route('admin.testimonials.index') }}"
-                    class="menu-link {{ request()->is('admin/testimonials') || request()->is('admin/testimonials/*') ? 'active' : '' }}">
-                    <i class="menu-icon tf-icons fas fa-cogs">
+                    class="menu-link {{ request()->is('admin/testimonials') || request()->is('admin/testimonials/*') ? 'c-active' : '' }}">
+                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
 
                     </i>
-                    <div data-i18n="   {{ trans('cruds.testimonial.title') }} ">
+                    <div data-i18n="    {{ trans('cruds.testimonial.title') }} ">
                         {{ trans('cruds.testimonial.title') }}
-                    </div>
-                </a>
-            </li>
-        @endcan
-        @can('newsletter_access')
-            <li
-                class="menu-item   {{ request()->is('admin/newsletters') || request()->is('admin/newsletters/*') ? 'active' : '' }} ">
-                <a href="{{ route('admin.newsletters.index') }}"
-                    class="menu-link {{ request()->is('admin/newsletters') || request()->is('admin/newsletters/*') ? 'active' : '' }}">
-                    <i class="menu-icon tf-icons fas fa-cogs">
-
-                    </i>
-                    <div data-i18n="   {{ trans('cruds.newsletter.title') }}">
-                        {{ trans('cruds.newsletter.title') }}
                     </div>
                 </a>
             </li>
@@ -905,14 +730,13 @@
                 </ul>
             </li>
         @endcan
-        <li
-            class="menu-item {{ request()->is('admin/system-calendar') || request()->is('admin/system-calendar/*') ? 'active' : '' }}  ">
+        <li class="menu-item ">
             <a href="{{ route('admin.systemCalendar') }}"
-                class="menu-link {{ request()->is('admin/system-calendar') || request()->is('admin/system-calendar/*') ? 'active' : '' }}">
-                <i class="fas fa-fw fa-calendar nav-icon">
+                class="menu-link {{ request()->is('admin/system-calendar') || request()->is('admin/system-calendar/*') ? 'c-active' : '' }}">
+                <i class="c-sidebar-nav-icon fa-fw fas fa-calendar">
 
                 </i>
-                <div data-i18n="   {{ trans('global.systemCalendar') }} ">
+                <div data-i18n="     {{ trans('global.systemCalendar') }} ">
                     {{ trans('global.systemCalendar') }}
                 </div>
             </a>
@@ -934,15 +758,12 @@
         </li>
         @if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
             @can('profile_password_edit')
-                <li
-                    class="menu-item {{ request()->is('admin/newsletters') || request()->is('admin/newsletters/*') ? 'active' : '' }}  ">
-                    <a class="menu-link {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'active' : '' }}"
+                <li class="menu-item ">
+                    <a class="menu-link {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'c-active' : '' }}"
                         href="{{ route('profile.password.edit') }}">
-                        <i class="fa-fw fas fa-key nav-icon">
+                        <i class="fa-fw fas fa-key c-sidebar-nav-icon">
                         </i>
-                        <div data-i18n=" {{ trans('global.change_password') }} ">
-                            {{ trans('global.change_password') }}
-                        </div>
+                        {{ trans('global.change_password') }}
                     </a>
                 </li>
             @endcan
@@ -958,6 +779,8 @@
 
             </a>
         </li>
+
+
     </ul>
 </aside>
 <!-- / Menu -->
