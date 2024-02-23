@@ -41,10 +41,10 @@
                     <td>
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        <input class="search form-control" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <select class="search">
+                        <select class="search form-control">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($cities as $key => $item)
                                 <option value="{{ $item->title_ar }}">{{ $item->title_ar }}</option>
@@ -52,10 +52,10 @@
                         </select>
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        <input class="search form-control" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        <input class="search form-control" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                     </td>

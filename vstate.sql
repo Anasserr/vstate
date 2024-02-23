@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 12, 2024 at 11:20 PM
--- Server version: 8.0.36-0ubuntu0.20.04.1
--- PHP Version: 8.2.10
+-- Generation Time: Feb 19, 2024 at 02:25 AM
+-- Server version: 10.6.16-MariaDB-cll-lve
+-- PHP Version: 8.1.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,13 +28,34 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `amenities` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `amenities`
+--
+
+INSERT INTO `amenities` (`id`, `title`, `active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Marshall Speaker', 1, '2024-02-14 16:54:42', '2024-02-14 16:54:42', NULL),
+(2, 'Wi-Fi internet access', 1, '2024-02-14 16:54:49', '2024-02-14 16:54:49', NULL),
+(3, 'HD TV with premium cable, BeIN Sports, OSN and Netflix', 1, '2024-02-14 16:54:55', '2024-02-14 16:54:55', NULL),
+(4, 'Access to all common pools', 1, '2024-02-14 16:55:01', '2024-02-14 16:55:01', NULL),
+(5, 'Refrigerator', 1, '2024-02-14 16:55:07', '2024-02-14 16:55:07', NULL),
+(6, 'Full automatic washing machine with dryer', 1, '2024-02-14 16:55:13', '2024-02-14 16:55:13', NULL),
+(7, 'Dishwasher', 1, '2024-02-14 16:55:18', '2024-02-14 16:55:18', NULL),
+(8, 'Kettle', 1, '2024-02-14 16:55:23', '2024-02-14 16:55:23', NULL),
+(9, 'Nespresso Machine', 1, '2024-02-14 16:55:30', '2024-02-14 16:55:30', NULL),
+(10, 'Steam iron', 1, '2024-02-14 16:55:35', '2024-02-14 16:55:35', NULL),
+(11, 'Ironing board', 1, '2024-02-14 16:55:39', '2024-02-14 16:55:39', NULL),
+(12, 'Air Conditioner', 1, '2024-02-14 16:55:45', '2024-02-14 16:55:45', NULL),
+(13, 'Microwave oven', 1, '2024-02-14 16:55:51', '2024-02-14 16:55:51', NULL),
+(14, 'Bedsheet, Towels and Duvet', 1, '2024-02-14 16:55:56', '2024-02-14 16:55:56', NULL),
+(15, 'Common Parking', 1, '2024-02-14 16:56:01', '2024-02-14 16:56:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -44,9 +64,30 @@ CREATE TABLE `amenities` (
 --
 
 CREATE TABLE `amenity_real_estate_unit` (
-  `real_estate_unit_id` bigint UNSIGNED NOT NULL,
-  `amenity_id` bigint UNSIGNED NOT NULL
+  `real_estate_unit_id` bigint(20) UNSIGNED NOT NULL,
+  `amenity_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `amenity_real_estate_unit`
+--
+
+INSERT INTO `amenity_real_estate_unit` (`real_estate_unit_id`, `amenity_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 15);
 
 -- --------------------------------------------------------
 
@@ -55,9 +96,9 @@ CREATE TABLE `amenity_real_estate_unit` (
 --
 
 CREATE TABLE `applications_request_sections` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -70,16 +111,44 @@ CREATE TABLE `applications_request_sections` (
 --
 
 CREATE TABLE `audit_logs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `subject_id` bigint UNSIGNED DEFAULT NULL,
-  `subject_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `properties` text COLLATE utf8mb4_unicode_ci,
-  `host` varchar(46) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `description` text NOT NULL,
+  `subject_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `subject_type` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `properties` text DEFAULT NULL,
+  `host` varchar(46) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `audit_logs`
+--
+
+INSERT INTO `audit_logs` (`id`, `description`, `subject_id`, `subject_type`, `user_id`, `properties`, `host`, `created_at`, `updated_at`) VALUES
+(1, 'audit:created', 1, 'App\\Models\\ProjectType#1', 1, '{\"title\":\"dssd\",\"active\":\"1\",\"updated_at\":\"2024-02-15 22:13:18\",\"created_at\":\"2024-02-15 22:13:18\",\"id\":1,\"image\":null,\"media\":[]}', '127.0.0.1', '2024-02-15 20:13:19', '2024-02-15 20:13:19'),
+(2, 'audit:created', 1, 'App\\Models\\BookMeeting#1', NULL, '{\"name\":\"name\",\"phone\":\"eeee\",\"date\":\"2024-02-14 01:38:33\",\"updated_at\":\"2024-02-15 23:38:59\",\"created_at\":\"2024-02-15 23:38:59\",\"id\":1}', '127.0.0.1', '2024-02-15 21:38:59', '2024-02-15 21:38:59'),
+(3, 'audit:updated', 1, 'App\\Models\\RealEstateUnit#1', 1, '{\"bua\":\"22\",\"ror\":\"22\",\"roi\":\"22\",\"updated_at\":\"2024-02-16 00:11:01\"}', '127.0.0.1', '2024-02-15 22:11:01', '2024-02-15 22:11:01'),
+(4, 'audit:deleted', 2, 'App\\Models\\RealEstateUnit#2', 1, '{\"id\":2,\"title\":\"Reserve Way New Braunfels, Texas\",\"description\":\"<p><strong>Lorem Ipsum<\\/strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\\/p>\",\"status\":\"published\",\"price\":\"780000\",\"featured\":\"yes\",\"premium\":\"yes\",\"location_link\":\"Qui ut minim est ips\",\"lat\":\"Pariatur Aliquam vo\",\"lang\":\"Consequatur exceptu\",\"number_of_room\":\"3\",\"number_of_floor\":\"3\",\"number_of_bath_room\":\"2\",\"number_of_master_room\":\"1\",\"notes\":\"Reprehenderit volupt\",\"has_garage\":1,\"number_of_garage\":\"1\",\"features\":\"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.<\\/p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<\\/p>\",\"address\":\"The standard chunk of Lorem Ipsum used since the 1500s\",\"bua\":null,\"ror\":null,\"roi\":null,\"created_at\":\"2024-02-14 06:14:26\",\"updated_at\":\"2024-02-16 00:11:16\",\"deleted_at\":\"2024-02-16 00:11:16\",\"project_id\":null,\"user_id\":2,\"image\":null,\"images\":[],\"plans\":[],\"image_360\":null,\"images_360\":[],\"media\":[]}', '127.0.0.1', '2024-02-15 22:11:16', '2024-02-15 22:11:16'),
+(5, 'audit:deleted', 3, 'App\\Models\\RealEstateUnit#3', 1, '{\"id\":3,\"title\":\"Reserve Way New Braunfels, Texas\",\"description\":\"<p><strong>Lorem Ipsum<\\/strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\\/p>\",\"status\":\"published\",\"price\":\"780000\",\"featured\":\"yes\",\"premium\":\"yes\",\"location_link\":\"Qui ut minim est ips\",\"lat\":\"Pariatur Aliquam vo\",\"lang\":\"Consequatur exceptu\",\"number_of_room\":\"3\",\"number_of_floor\":\"3\",\"number_of_bath_room\":\"2\",\"number_of_master_room\":\"1\",\"notes\":\"Reprehenderit volupt\",\"has_garage\":1,\"number_of_garage\":\"1\",\"features\":\"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.<\\/p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<\\/p>\",\"address\":\"The standard chunk of Lorem Ipsum used since the 1500s\",\"bua\":null,\"ror\":null,\"roi\":null,\"created_at\":\"2024-02-14 06:14:26\",\"updated_at\":\"2024-02-16 00:11:16\",\"deleted_at\":\"2024-02-16 00:11:16\",\"project_id\":null,\"user_id\":2,\"image\":null,\"images\":[],\"plans\":[],\"image_360\":null,\"images_360\":[],\"media\":[]}', '127.0.0.1', '2024-02-15 22:11:16', '2024-02-15 22:11:16'),
+(6, 'audit:deleted', 4, 'App\\Models\\RealEstateUnit#4', 1, '{\"id\":4,\"title\":\"Reserve Way New Braunfels, Texas\",\"description\":\"<p><strong>Lorem Ipsum<\\/strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\\/p>\",\"status\":\"published\",\"price\":\"780000\",\"featured\":\"yes\",\"premium\":\"yes\",\"location_link\":\"Qui ut minim est ips\",\"lat\":\"Pariatur Aliquam vo\",\"lang\":\"Consequatur exceptu\",\"number_of_room\":\"3\",\"number_of_floor\":\"3\",\"number_of_bath_room\":\"2\",\"number_of_master_room\":\"1\",\"notes\":\"Reprehenderit volupt\",\"has_garage\":1,\"number_of_garage\":\"1\",\"features\":\"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.<\\/p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<\\/p>\",\"address\":\"The standard chunk of Lorem Ipsum used since the 1500s\",\"bua\":null,\"ror\":null,\"roi\":null,\"created_at\":\"2024-02-14 06:14:26\",\"updated_at\":\"2024-02-16 00:11:16\",\"deleted_at\":\"2024-02-16 00:11:16\",\"project_id\":null,\"user_id\":2,\"image\":null,\"images\":[],\"plans\":[],\"image_360\":null,\"images_360\":[],\"media\":[]}', '127.0.0.1', '2024-02-15 22:11:16', '2024-02-15 22:11:16'),
+(7, 'audit:deleted', 5, 'App\\Models\\RealEstateUnit#5', 1, '{\"id\":5,\"title\":\"Reserve Way New Braunfels, Texas\",\"description\":\"<p><strong>Lorem Ipsum<\\/strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\\/p>\",\"status\":\"published\",\"price\":\"780000\",\"featured\":\"yes\",\"premium\":\"yes\",\"location_link\":\"Qui ut minim est ips\",\"lat\":\"Pariatur Aliquam vo\",\"lang\":\"Consequatur exceptu\",\"number_of_room\":\"3\",\"number_of_floor\":\"3\",\"number_of_bath_room\":\"2\",\"number_of_master_room\":\"1\",\"notes\":\"Reprehenderit volupt\",\"has_garage\":1,\"number_of_garage\":\"1\",\"features\":\"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.<\\/p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<\\/p>\",\"address\":\"The standard chunk of Lorem Ipsum used since the 1500s\",\"bua\":null,\"ror\":null,\"roi\":null,\"created_at\":\"2024-02-14 06:14:26\",\"updated_at\":\"2024-02-16 00:11:16\",\"deleted_at\":\"2024-02-16 00:11:16\",\"project_id\":null,\"user_id\":2,\"image\":null,\"images\":[],\"plans\":[],\"image_360\":null,\"images_360\":[],\"media\":[]}', '127.0.0.1', '2024-02-15 22:11:16', '2024-02-15 22:11:16'),
+(8, 'audit:deleted', 6, 'App\\Models\\RealEstateUnit#6', 1, '{\"id\":6,\"title\":\"Reserve Way New Braunfels, Texas\",\"description\":\"<p><strong>Lorem Ipsum<\\/strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\\/p>\",\"status\":\"published\",\"price\":\"780000\",\"featured\":\"yes\",\"premium\":\"yes\",\"location_link\":\"Qui ut minim est ips\",\"lat\":\"Pariatur Aliquam vo\",\"lang\":\"Consequatur exceptu\",\"number_of_room\":\"3\",\"number_of_floor\":\"3\",\"number_of_bath_room\":\"2\",\"number_of_master_room\":\"1\",\"notes\":\"Reprehenderit volupt\",\"has_garage\":1,\"number_of_garage\":\"1\",\"features\":\"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.<\\/p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<\\/p>\",\"address\":\"The standard chunk of Lorem Ipsum used since the 1500s\",\"bua\":null,\"ror\":null,\"roi\":null,\"created_at\":\"2024-02-14 06:14:26\",\"updated_at\":\"2024-02-16 00:11:16\",\"deleted_at\":\"2024-02-16 00:11:16\",\"project_id\":null,\"user_id\":2,\"image\":null,\"images\":[],\"plans\":[],\"image_360\":null,\"images_360\":[],\"media\":[]}', '127.0.0.1', '2024-02-15 22:11:16', '2024-02-15 22:11:16'),
+(9, 'audit:deleted', 7, 'App\\Models\\RealEstateUnit#7', 1, '{\"id\":7,\"title\":\"Reserve Way New Braunfels, Texas\",\"description\":\"<p><strong>Lorem Ipsum<\\/strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\\/p>\",\"status\":\"published\",\"price\":\"780000\",\"featured\":\"yes\",\"premium\":\"yes\",\"location_link\":\"Qui ut minim est ips\",\"lat\":\"Pariatur Aliquam vo\",\"lang\":\"Consequatur exceptu\",\"number_of_room\":\"3\",\"number_of_floor\":\"3\",\"number_of_bath_room\":\"2\",\"number_of_master_room\":\"1\",\"notes\":\"Reprehenderit volupt\",\"has_garage\":1,\"number_of_garage\":\"1\",\"features\":\"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.<\\/p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<\\/p>\",\"address\":\"The standard chunk of Lorem Ipsum used since the 1500s\",\"bua\":null,\"ror\":null,\"roi\":null,\"created_at\":\"2024-02-14 06:14:26\",\"updated_at\":\"2024-02-16 00:11:16\",\"deleted_at\":\"2024-02-16 00:11:16\",\"project_id\":null,\"user_id\":2,\"image\":null,\"images\":[],\"plans\":[],\"image_360\":null,\"images_360\":[],\"media\":[]}', '127.0.0.1', '2024-02-15 22:11:16', '2024-02-15 22:11:16'),
+(10, 'audit:deleted', 8, 'App\\Models\\RealEstateUnit#8', 1, '{\"id\":8,\"title\":\"Reserve Way New Braunfels, Texas\",\"description\":\"<p><strong>Lorem Ipsum<\\/strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\\/p>\",\"status\":\"published\",\"price\":\"780000\",\"featured\":\"yes\",\"premium\":\"yes\",\"location_link\":\"Qui ut minim est ips\",\"lat\":\"Pariatur Aliquam vo\",\"lang\":\"Consequatur exceptu\",\"number_of_room\":\"3\",\"number_of_floor\":\"3\",\"number_of_bath_room\":\"2\",\"number_of_master_room\":\"1\",\"notes\":\"Reprehenderit volupt\",\"has_garage\":1,\"number_of_garage\":\"1\",\"features\":\"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.<\\/p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<\\/p>\",\"address\":\"The standard chunk of Lorem Ipsum used since the 1500s\",\"bua\":null,\"ror\":null,\"roi\":null,\"created_at\":\"2024-02-14 06:14:26\",\"updated_at\":\"2024-02-16 00:11:16\",\"deleted_at\":\"2024-02-16 00:11:16\",\"project_id\":null,\"user_id\":2,\"image\":null,\"images\":[],\"plans\":[],\"image_360\":null,\"images_360\":[],\"media\":[]}', '127.0.0.1', '2024-02-15 22:11:16', '2024-02-15 22:11:16'),
+(11, 'audit:deleted', 9, 'App\\Models\\RealEstateUnit#9', 1, '{\"id\":9,\"title\":\"Reserve Way New Braunfels, Texas\",\"description\":\"<p><strong>Lorem Ipsum<\\/strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\\/p>\",\"status\":\"published\",\"price\":\"780000\",\"featured\":\"yes\",\"premium\":\"yes\",\"location_link\":\"Qui ut minim est ips\",\"lat\":\"Pariatur Aliquam vo\",\"lang\":\"Consequatur exceptu\",\"number_of_room\":\"3\",\"number_of_floor\":\"3\",\"number_of_bath_room\":\"2\",\"number_of_master_room\":\"1\",\"notes\":\"Reprehenderit volupt\",\"has_garage\":1,\"number_of_garage\":\"1\",\"features\":\"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.<\\/p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<\\/p>\",\"address\":\"The standard chunk of Lorem Ipsum used since the 1500s\",\"bua\":null,\"ror\":null,\"roi\":null,\"created_at\":\"2024-02-14 06:14:26\",\"updated_at\":\"2024-02-16 00:11:16\",\"deleted_at\":\"2024-02-16 00:11:16\",\"project_id\":null,\"user_id\":2,\"image\":null,\"images\":[],\"plans\":[],\"image_360\":null,\"images_360\":[],\"media\":[]}', '127.0.0.1', '2024-02-15 22:11:16', '2024-02-15 22:11:16'),
+(12, 'audit:deleted', 10, 'App\\Models\\RealEstateUnit#10', 1, '{\"id\":10,\"title\":\"Reserve Way New Braunfels, Texas\",\"description\":\"<p><strong>Lorem Ipsum<\\/strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\\/p>\",\"status\":\"published\",\"price\":\"780000\",\"featured\":\"yes\",\"premium\":\"yes\",\"location_link\":\"Qui ut minim est ips\",\"lat\":\"Pariatur Aliquam vo\",\"lang\":\"Consequatur exceptu\",\"number_of_room\":\"3\",\"number_of_floor\":\"3\",\"number_of_bath_room\":\"2\",\"number_of_master_room\":\"1\",\"notes\":\"Reprehenderit volupt\",\"has_garage\":1,\"number_of_garage\":\"1\",\"features\":\"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.<\\/p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<\\/p>\",\"address\":\"The standard chunk of Lorem Ipsum used since the 1500s\",\"bua\":null,\"ror\":null,\"roi\":null,\"created_at\":\"2024-02-14 06:14:26\",\"updated_at\":\"2024-02-16 00:11:16\",\"deleted_at\":\"2024-02-16 00:11:16\",\"project_id\":null,\"user_id\":2,\"image\":null,\"images\":[],\"plans\":[],\"image_360\":null,\"images_360\":[],\"media\":[]}', '127.0.0.1', '2024-02-15 22:11:16', '2024-02-15 22:11:16'),
+(13, 'audit:created', 3, 'App\\Models\\RealEstateApplication#3', NULL, '{\"email\":\"hany@mail.com\",\"updated_at\":\"2024-02-17 06:46:55\",\"created_at\":\"2024-02-17 06:46:55\",\"id\":3}', '196.157.43.29', '2024-02-17 13:46:55', '2024-02-17 13:46:55'),
+(14, 'audit:created', 2, 'App\\Models\\Project#2', 1, '{\"title\":\"Nile business city\",\"active\":\"1\",\"user_id\":\"2\",\"status\":\"active\",\"lat\":null,\"lang\":null,\"location_link\":null,\"description\":\"<p>We are never satisfied with what we have accomplished, but we always strive to achieve the best by unleashing our dreams and aspirations for the future of urban development in Egypt. We focus on improving the quality of life in its social, economic and environmental sense, through the establishment of huge projects based on the genius of design and modern technology; In order to remain prominent and distinguished landmarks at the local and international levels over time for future generations.<\\/p>\",\"addresse\":null,\"city_id\":null,\"featured\":\"active\",\"project_type_id\":\"1\",\"updated_at\":\"2024-02-17 08:20:53\",\"created_at\":\"2024-02-17 08:20:53\",\"id\":2,\"image\":null,\"images\":null,\"attachments\":[],\"brochure\":null,\"video\":[],\"media\":[]}', '196.157.105.94', '2024-02-17 15:20:53', '2024-02-17 15:20:53'),
+(15, 'audit:updated', 2, 'App\\Models\\Project#2', 1, '{\"addresse\":\"ddddd dddd ddddd\",\"updated_at\":\"2024-02-17 17:21:41\",\"second_title\":\"ddddddddd\",\"second_description\":\"<p>We are never satisfied with what we have accomplished, but we always strive to achieve the best by unleashing our dreams and aspirations for the future of urban development in Egypt. We focus on improving the quality of life in its social, economic and environmental sense, through the establishment of huge projects based on the genius of design and modern technology; In order to remain prominent and distinguished landmarks at the local and international levels over time for future generations.<\\/p>\",\"plan_description\":\"dddddddddddddddddddddddddddddddddddddddddddddddddd\"}', '197.52.158.36', '2024-02-18 00:21:41', '2024-02-18 00:21:41'),
+(16, 'audit:updated', 2, 'App\\Models\\Project#2', 1, '{\"updated_at\":\"2024-02-17 17:24:06\",\"plan_title\":\"ddddddddddddddddddddddd\"}', '197.52.158.36', '2024-02-18 00:24:06', '2024-02-18 00:24:06'),
+(17, 'audit:updated', 2, 'App\\Models\\Project#2', 1, '{\"updated_at\":\"2024-02-17 19:43:08\",\"plan_title\":\"Master plan\",\"plan_description\":\"Nile Business City complex is located in the heart of the golden spot the New Administrative capital With a strategic location that is pinpointed in the center of the river and directly on the Mohammed Bin Zayed AxisOne can\\u2019t miss this striking 55-floor business city that is directly situated in the middle of the Downtown district, in the heart of the New Administrative  business community. Only a 20-minute drive from New Cairo, Nile Business city multiple access points through Road 90, Suez and Sokhna roads It is a five-minute drive along the axes of The Grand Mosque, Cathedral, Al Masa hotel and The Presidential Palace.\"}', '196.157.73.131', '2024-02-18 02:43:08', '2024-02-18 02:43:08'),
+(18, 'audit:created', 4, 'App\\Models\\RealEstateApplication#4', NULL, '{\"email\":\"cosicyqide@mailinator.com\",\"updated_at\":\"2024-02-18 11:37:42\",\"created_at\":\"2024-02-18 11:37:42\",\"id\":4}', '197.36.240.149', '2024-02-18 18:37:42', '2024-02-18 18:37:42'),
+(19, 'audit:created', 1, 'App\\Models\\City#1', 1, '{\"title_ar\":\"ddd\",\"title_en\":\"ddd\",\"country_id\":\"3\",\"updated_at\":\"2024-02-18 12:23:21\",\"created_at\":\"2024-02-18 12:23:21\",\"id\":1,\"image\":null,\"media\":[]}', '197.36.240.149', '2024-02-18 19:23:21', '2024-02-18 19:23:21'),
+(20, 'audit:updated', 2, 'App\\Models\\Project#2', 1, '{\"updated_at\":\"2024-02-18 12:23:40\",\"city_id\":\"1\"}', '197.36.240.149', '2024-02-18 19:23:40', '2024-02-18 19:23:40'),
+(21, 'audit:updated', 2, 'App\\Models\\Project#2', 1, '{\"updated_at\":\"2024-02-18 12:51:03\",\"second_title\":\"Welcome to Nile Business City\",\"second_description\":\"<p>The tallest skyscraper in the golden point of the New Administrative Capital in the middle of the Green River and the center of the downtown area, with a height of 233 meters and with the widest facade on the northern Bin Zayed Axis, with a width of 200 meters.<\\/p>\"}', '197.36.240.149', '2024-02-18 19:51:03', '2024-02-18 19:51:03'),
+(22, 'audit:updated', 1, 'App\\Models\\RealEstateUnit#1', 1, '{\"updated_at\":\"2024-02-19 07:52:09\",\"city_id\":\"1\"}', '197.36.240.149', '2024-02-19 14:52:09', '2024-02-19 14:52:09');
 
 -- --------------------------------------------------------
 
@@ -88,12 +157,33 @@ CREATE TABLE `audit_logs` (
 --
 
 CREATE TABLE `available_for_mortgages` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `available_for_mortgages`
+--
+
+INSERT INTO `available_for_mortgages` (`id`, `title`, `active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'All Financing Options', 1, '2024-02-13 15:21:15', '2024-02-13 15:21:15', NULL),
+(2, 'CBE 3% Initiative', 1, '2024-02-13 15:21:22', '2024-02-13 15:21:22', NULL),
+(3, 'CBE 8% Initiative', 1, '2024-02-13 15:21:28', '2024-02-13 15:21:28', NULL),
+(4, 'Commercial Financing', 1, '2024-02-13 15:21:35', '2024-02-13 15:21:35', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `available_for_mortgage_real_estate_application`
+--
+
+CREATE TABLE `available_for_mortgage_real_estate_application` (
+  `real_estate_application_id` bigint(20) UNSIGNED NOT NULL,
+  `available_for_mortgage_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -103,19 +193,27 @@ CREATE TABLE `available_for_mortgages` (
 --
 
 CREATE TABLE `book_meetings` (
-  `id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `date` datetime NOT NULL,
-  `meeting_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message` longtext COLLATE utf8mb4_unicode_ci,
+  `meeting_type` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) NOT NULL,
+  `message` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `unit_id` bigint UNSIGNED DEFAULT NULL
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `unit_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `project_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `book_meetings`
+--
+
+INSERT INTO `book_meetings` (`id`, `date`, `meeting_type`, `name`, `email`, `phone`, `message`, `created_at`, `updated_at`, `deleted_at`, `user_id`, `unit_id`, `project_id`) VALUES
+(1, '2024-02-14 01:38:33', NULL, 'name', NULL, 'eeee', NULL, '2024-02-15 21:38:59', '2024-02-15 21:38:59', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -124,14 +222,21 @@ CREATE TABLE `book_meetings` (
 --
 
 CREATE TABLE `cities` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title_ar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title_ar` varchar(255) NOT NULL,
+  `title_en` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `country_id` bigint UNSIGNED DEFAULT NULL
+  `country_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cities`
+--
+
+INSERT INTO `cities` (`id`, `title_ar`, `title_en`, `created_at`, `updated_at`, `deleted_at`, `country_id`) VALUES
+(1, 'ddd', 'ddd', '2024-02-18 19:23:21', '2024-02-18 19:23:21', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -140,12 +245,12 @@ CREATE TABLE `cities` (
 --
 
 CREATE TABLE `contactus` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `subject` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `message` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -158,9 +263,9 @@ CREATE TABLE `contactus` (
 --
 
 CREATE TABLE `content_categories` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -173,8 +278,8 @@ CREATE TABLE `content_categories` (
 --
 
 CREATE TABLE `content_category_content_page` (
-  `content_page_id` bigint UNSIGNED NOT NULL,
-  `content_category_id` bigint UNSIGNED NOT NULL
+  `content_page_id` bigint(20) UNSIGNED NOT NULL,
+  `content_category_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -184,10 +289,10 @@ CREATE TABLE `content_category_content_page` (
 --
 
 CREATE TABLE `content_pages` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `page_text` longtext COLLATE utf8mb4_unicode_ci,
-  `excerpt` longtext COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `page_text` longtext DEFAULT NULL,
+  `excerpt` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -200,8 +305,8 @@ CREATE TABLE `content_pages` (
 --
 
 CREATE TABLE `content_page_content_tag` (
-  `content_page_id` bigint UNSIGNED NOT NULL,
-  `content_tag_id` bigint UNSIGNED NOT NULL
+  `content_page_id` bigint(20) UNSIGNED NOT NULL,
+  `content_tag_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -211,9 +316,9 @@ CREATE TABLE `content_page_content_tag` (
 --
 
 CREATE TABLE `content_tags` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -226,10 +331,10 @@ CREATE TABLE `content_tags` (
 --
 
 CREATE TABLE `countries` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `short_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `short_code` varchar(255) DEFAULT NULL,
+  `name_en` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -488,14 +593,14 @@ INSERT INTO `countries` (`id`, `name`, `short_code`, `name_en`, `created_at`, `u
 --
 
 CREATE TABLE `eventjoiningusers` (
-  `id` bigint UNSIGNED NOT NULL,
-  `block` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `block` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `event_id` bigint UNSIGNED DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `event_status_id` bigint UNSIGNED DEFAULT NULL
+  `event_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `event_status_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -505,23 +610,23 @@ CREATE TABLE `eventjoiningusers` (
 --
 
 CREATE TABLE `events` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `event_date` datetime DEFAULT NULL,
-  `addresse` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `location_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lang` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `published` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `show_first` tinyint(1) DEFAULT '0',
+  `addresse` varchar(255) DEFAULT NULL,
+  `location_link` varchar(255) DEFAULT NULL,
+  `lat` varchar(255) DEFAULT NULL,
+  `lang` varchar(255) DEFAULT NULL,
+  `published` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `show_first` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_by_id` bigint UNSIGNED DEFAULT NULL,
-  `country_id` bigint UNSIGNED DEFAULT NULL,
-  `city_id` bigint UNSIGNED DEFAULT NULL
+  `created_by_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `country_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `city_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -531,9 +636,9 @@ CREATE TABLE `events` (
 --
 
 CREATE TABLE `eventtags` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -546,9 +651,9 @@ CREATE TABLE `eventtags` (
 --
 
 CREATE TABLE `eventuserstatuses` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -561,9 +666,9 @@ CREATE TABLE `eventuserstatuses` (
 --
 
 CREATE TABLE `event_categories` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -576,14 +681,14 @@ CREATE TABLE `event_categories` (
 --
 
 CREATE TABLE `event_discussions` (
-  `id` bigint UNSIGNED NOT NULL,
-  `discussion` longtext COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `discussion` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `event_id` bigint UNSIGNED DEFAULT NULL,
-  `replay_discussion_id` bigint UNSIGNED DEFAULT NULL
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `event_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `replay_discussion_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -593,8 +698,8 @@ CREATE TABLE `event_discussions` (
 --
 
 CREATE TABLE `event_eventtag` (
-  `event_id` bigint UNSIGNED NOT NULL,
-  `eventtag_id` bigint UNSIGNED NOT NULL
+  `event_id` bigint(20) UNSIGNED NOT NULL,
+  `eventtag_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -604,8 +709,8 @@ CREATE TABLE `event_eventtag` (
 --
 
 CREATE TABLE `faq_categories` (
-  `id` bigint UNSIGNED NOT NULL,
-  `category` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -618,13 +723,13 @@ CREATE TABLE `faq_categories` (
 --
 
 CREATE TABLE `faq_questions` (
-  `id` bigint UNSIGNED NOT NULL,
-  `question` longtext COLLATE utf8mb4_unicode_ci,
-  `answer` longtext COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question` longtext DEFAULT NULL,
+  `answer` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `category_id` bigint UNSIGNED DEFAULT NULL
+  `category_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -634,12 +739,32 @@ CREATE TABLE `faq_questions` (
 --
 
 CREATE TABLE `finish_types` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `finish_types`
+--
+
+INSERT INTO `finish_types` (`id`, `title`, `active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Finished', 1, '2024-02-13 15:15:11', '2024-02-13 15:15:11', NULL),
+(2, 'Semi finished', 1, '2024-02-13 15:15:21', '2024-02-13 15:15:21', NULL),
+(3, 'Core & Shell', 1, '2024-02-13 15:15:37', '2024-02-13 15:15:37', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `finish_type_real_estate_application`
+--
+
+CREATE TABLE `finish_type_real_estate_application` (
+  `real_estate_application_id` bigint(20) UNSIGNED NOT NULL,
+  `finish_type_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -649,12 +774,12 @@ CREATE TABLE `finish_types` (
 --
 
 CREATE TABLE `likes` (
-  `id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `unit_id` bigint UNSIGNED DEFAULT NULL
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `unit_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -664,25 +789,56 @@ CREATE TABLE `likes` (
 --
 
 CREATE TABLE `media` (
-  `id` bigint UNSIGNED NOT NULL,
-  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint UNSIGNED NOT NULL,
-  `uuid` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `collection_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mime_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `disk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `conversions_disk` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `size` bigint UNSIGNED NOT NULL,
-  `manipulations` json NOT NULL,
-  `custom_properties` json NOT NULL,
-  `generated_conversions` json NOT NULL,
-  `responsive_images` json NOT NULL,
-  `order_column` int UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` char(36) DEFAULT NULL,
+  `collection_name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `mime_type` varchar(255) DEFAULT NULL,
+  `disk` varchar(255) NOT NULL,
+  `conversions_disk` varchar(255) DEFAULT NULL,
+  `size` bigint(20) UNSIGNED NOT NULL,
+  `manipulations` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`manipulations`)),
+  `custom_properties` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`custom_properties`)),
+  `generated_conversions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`generated_conversions`)),
+  `responsive_images` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`responsive_images`)),
+  `order_column` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `media`
+--
+
+INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, `name`, `file_name`, `mime_type`, `disk`, `conversions_disk`, `size`, `manipulations`, `custom_properties`, `generated_conversions`, `responsive_images`, `order_column`, `created_at`, `updated_at`) VALUES
+(1, 'App\\Models\\RealEstateUnit', 1, '83273a5f-7970-468f-aabd-a789e819b767', 'image', '65cc9ad2c0880_itemimage4', '65cc9ad2c0880_itemimage4.png', 'image/png', 'public', 'public', 3780931, '[]', '[]', '{\"thumb\": true, \"preview\": true}', '[]', 1, '2024-02-14 15:53:12', '2024-02-14 15:53:13'),
+(2, 'App\\Models\\RealEstateUnit', 1, '8e5d5173-238c-496f-a197-524d6fb62747', 'images', '65cc9ade0df9f_itemdetailsthumbs1', '65cc9ade0df9f_itemdetailsthumbs1.png', 'image/png', 'public', 'public', 1371054, '[]', '[]', '{\"thumb\": true, \"preview\": true}', '[]', 2, '2024-02-14 15:53:13', '2024-02-14 15:53:14'),
+(3, 'App\\Models\\RealEstateUnit', 1, 'f9153bfa-6f0c-40ca-9fd3-252c543683b9', 'images', '65cc9ae9a9f06_itempreview', '65cc9ae9a9f06_itempreview.png', 'image/png', 'public', 'public', 1371054, '[]', '[]', '{\"thumb\": true, \"preview\": true}', '[]', 3, '2024-02-14 15:53:14', '2024-02-14 15:53:15'),
+(5, 'App\\Models\\User', 2, 'e6806b85-a67e-4334-8ad2-c5b5aca15054', 'image', '65cc9e5b1c73b_358478215_261084860143918_4185713919728228173_n', '65cc9e5b1c73b_358478215_261084860143918_4185713919728228173_n.jpg', 'image/jpeg', 'public', 'public', 62145, '[]', '[]', '{\"thumb\": true, \"preview\": true}', '[]', 1, '2024-02-14 16:05:02', '2024-02-14 16:05:02'),
+(6, 'App\\Models\\Project', 1, '66fc3382-d49f-42d7-8e06-d194e302193d', 'image', '65cea15f87b95_WhatsApp Image 2023-12-12 at 2.36.39 PM', '65cea15f87b95_WhatsApp-Image-2023-12-12-at-2.36.39-PM.jpeg', 'image/jpeg', 'public', 'public', 115003, '[]', '[]', '{\"thumb\": true, \"preview\": true}', '[]', 1, '2024-02-16 04:42:59', '2024-02-16 04:42:59'),
+(7, 'App\\Models\\Project', 1, '596ec980-130d-46c3-98cf-9c3ad827f10d', 'images', '65cea168cd0d7_WhatsApp Image 2023-12-12 at 2.36.38 PM (1)', '65cea168cd0d7_WhatsApp-Image-2023-12-12-at-2.36.38-PM-(1).jpeg', 'image/jpeg', 'public', 'public', 102263, '[]', '[]', '{\"thumb\": true, \"preview\": true}', '[]', 2, '2024-02-16 04:42:59', '2024-02-16 04:43:00'),
+(8, 'App\\Models\\Project', 1, 'a1eb1053-bcc8-4e16-b6d3-9242783aaf2f', 'attachments', '65cea17ba1fec_TLD Company Profile - Adjusted 18-12 small', '65cea17ba1fec_TLD-Company-Profile---Adjusted-18-12-small.pdf', 'application/pdf', 'public', 'public', 10241753, '[]', '[]', '[]', '[]', 3, '2024-02-16 04:43:00', '2024-02-16 04:43:00'),
+(9, 'App\\Models\\Project', 2, 'bcf34b46-4980-4a11-9d3e-3a0e4c636642', 'image', '65d06bf6c13fc_sddefault', '65d06bf6c13fc_sddefault.jpg', 'image/jpeg', 'public', 'public', 10624, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 1, '2024-02-17 15:20:53', '2024-02-17 15:20:53'),
+(10, 'App\\Models\\Project', 2, '6651ddc6-59ab-4bf3-a5f2-a5924403f644', 'images', '65d06c250e46c_VIDEOS-Google-Drive_000153.299-1024x576', '65d06c250e46c_VIDEOS-Google-Drive_000153.299-1024x576.jpg', 'image/jpeg', 'public', 'public', 29354, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 2, '2024-02-17 15:20:53', '2024-02-17 15:20:53'),
+(21, 'App\\Models\\Project', 2, '10eabc06-438e-459c-9792-f83799ccc331', 'attachments', '65d0eb96537d5_TLD Presentation Template', '65d0eb96537d5_TLD-Presentation-Template.pptx', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'public', 'public', 155339, '[]', '[]', '[]', '[]', 3, '2024-02-18 00:24:06', '2024-02-18 00:24:06'),
+(22, 'App\\Models\\Project', 2, '25d92bb9-26a9-48a8-8282-65324165f677', 'plan_image', '65d0eba4987e2_WhatsApp Image 2023-12-12 at 2.36.38 PM', '65d0eba4987e2_WhatsApp-Image-2023-12-12-at-2.36.38-PM.jpeg', 'image/jpeg', 'public', 'public', 117489, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 4, '2024-02-18 00:24:06', '2024-02-18 00:24:06'),
+(23, 'App\\Models\\Project', 2, 'ab3ca847-5f42-47c1-841e-4d65f58b42a5', 'construction_updates_images', '65d0eba8a786f_WhatsApp Image 2023-12-12 at 2.36.41 PM (1)', '65d0eba8a786f_WhatsApp-Image-2023-12-12-at-2.36.41-PM-(1).jpeg', 'image/jpeg', 'public', 'public', 178143, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 5, '2024-02-18 00:24:06', '2024-02-18 00:24:07'),
+(24, 'App\\Models\\Project', 2, '1ffc5b06-14e4-4061-bc4c-15a27817ae2c', 'construction_updates_images', '65d0eba901984_WhatsApp Image 2023-12-12 at 2.36.41 PM', '65d0eba901984_WhatsApp-Image-2023-12-12-at-2.36.41-PM.jpeg', 'image/jpeg', 'public', 'public', 162516, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 6, '2024-02-18 00:24:07', '2024-02-18 00:24:07'),
+(25, 'App\\Models\\Project', 2, '1cc7f37e-1014-41f4-825d-3ab7d76f40d7', 'construction_updates_images', '65d0eba966e8d_WhatsApp Image 2023-12-12 at 2.36.40 PM (1)', '65d0eba966e8d_WhatsApp-Image-2023-12-12-at-2.36.40-PM-(1).jpeg', 'image/jpeg', 'public', 'public', 125100, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 7, '2024-02-18 00:24:07', '2024-02-18 00:24:07'),
+(26, 'App\\Models\\Project', 2, 'cf9d00f3-64f0-4ec4-95fe-bc4ca932ca36', 'construction_updates_images', '65d0eba995cab_WhatsApp Image 2023-12-12 at 2.36.40 PM', '65d0eba995cab_WhatsApp-Image-2023-12-12-at-2.36.40-PM.jpeg', 'image/jpeg', 'public', 'public', 124488, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 8, '2024-02-18 00:24:07', '2024-02-18 00:24:07'),
+(27, 'App\\Models\\Project', 2, '09b74bc6-9298-4ad6-8411-b30dfb1cc0f2', 'construction_updates_images', '65d0ebaa38e9d_WhatsApp Image 2023-12-12 at 2.36.39 PM', '65d0ebaa38e9d_WhatsApp-Image-2023-12-12-at-2.36.39-PM.jpeg', 'image/jpeg', 'public', 'public', 115003, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 9, '2024-02-18 00:24:07', '2024-02-18 00:24:07'),
+(28, 'App\\Models\\Project', 2, '1e098471-5117-481b-a9d3-877dde323062', 'construction_updates_images', '65d0ebaa4377e_WhatsApp Image 2023-12-12 at 2.36.39 PM (1)', '65d0ebaa4377e_WhatsApp-Image-2023-12-12-at-2.36.39-PM-(1).jpeg', 'image/jpeg', 'public', 'public', 159000, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 10, '2024-02-18 00:24:07', '2024-02-18 00:24:07'),
+(29, 'App\\Models\\Project', 2, 'b4b770e5-9763-4d8e-aa6c-5e8bee5648ec', 'construction_updates_images', '65d0ebaab25bf_WhatsApp Image 2023-12-12 at 2.36.38 PM (1)', '65d0ebaab25bf_WhatsApp-Image-2023-12-12-at-2.36.38-PM-(1).jpeg', 'image/jpeg', 'public', 'public', 102263, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 11, '2024-02-18 00:24:07', '2024-02-18 00:24:08'),
+(30, 'App\\Models\\Project', 2, 'b9a480d9-4d0c-483f-bb72-b8169ee601f3', 'construction_updates_images', '65d0ebaae774b_WhatsApp Image 2023-12-12 at 2.36.38 PM', '65d0ebaae774b_WhatsApp-Image-2023-12-12-at-2.36.38-PM.jpeg', 'image/jpeg', 'public', 'public', 117489, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 12, '2024-02-18 00:24:08', '2024-02-18 00:24:08'),
+(31, 'App\\Models\\Project', 2, '5b8b1114-1cb2-4ae6-92e4-e30ca90b60a1', 'construction_updates_images', '65d0ebab8c760_WhatsApp Image 2023-12-12 at 2.36.37 PM', '65d0ebab8c760_WhatsApp-Image-2023-12-12-at-2.36.37-PM.jpeg', 'image/jpeg', 'public', 'public', 156783, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 13, '2024-02-18 00:24:08', '2024-02-18 00:24:08'),
+(32, 'App\\Models\\Project', 2, 'ebbc9bb4-bc9d-40e1-b8ff-9830de23cac5', 'images', '65d10cafcef73_sddefault', '65d10cafcef73_sddefault.jpg', 'image/jpeg', 'public', 'public', 10624, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 14, '2024-02-18 02:46:50', '2024-02-18 02:46:51'),
+(33, 'App\\Models\\Project', 2, '3b62bec3-458b-4b29-b382-9c652e99c948', 'images', '65d10d252dde7_itemimage3', '65d10d252dde7_itemimage3.png', 'image/png', 'public', 'public', 153170, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 15, '2024-02-18 02:46:51', '2024-02-18 02:46:51'),
+(35, 'App\\Models\\Project', 2, '1e7bf159-ee7a-4e15-8093-e8758a61e9c5', 'banners', '65d1f777e08c5_65d06c250e46c_VIDEOS-Google-Drive_000153.299-1024x576', '65d1f777e08c5_65d06c250e46c_VIDEOS-Google-Drive_000153.299-1024x576.jpg', 'image/jpeg', 'public', 'public', 29354, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 17, '2024-02-18 19:26:34', '2024-02-18 19:26:34'),
+(36, 'App\\Models\\Project', 2, 'ed76789c-332d-446b-b478-63a7a343b750', 'second_image', '65d1fd3444d2a_itemimage3', '65d1fd3444d2a_itemimage3.png', 'image/png', 'public', 'public', 153170, '[]', '[]', '{\"thumb\":true,\"preview\":true}', '[]', 18, '2024-02-18 19:51:04', '2024-02-18 19:51:04'),
+(37, 'App\\Models\\Project', 2, '98ee2b22-0df1-437b-b074-d6a11b031bc1', 'brochure', '65d200409404c_dashboard-isuues', '65d200409404c_dashboard-isuues.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'public', 'public', 14443, '[]', '[]', '[]', '[]', 19, '2024-02-18 20:04:07', '2024-02-18 20:04:07');
 
 -- --------------------------------------------------------
 
@@ -691,9 +847,9 @@ CREATE TABLE `media` (
 --
 
 CREATE TABLE `migrations` (
-  `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -703,72 +859,82 @@ CREATE TABLE `migrations` (
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_100000_create_password_resets_table', 1),
 (2, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(3, '2024_02_12_000001_create_audit_logs_table', 1),
-(4, '2024_02_12_000002_create_media_table', 1),
-(5, '2024_02_12_000003_create_permissions_table', 1),
-(6, '2024_02_12_000004_create_roles_table', 1),
-(7, '2024_02_12_000005_create_users_table', 1),
-(8, '2024_02_12_000006_create_faq_categories_table', 1),
-(9, '2024_02_12_000007_create_faq_questions_table', 1),
-(10, '2024_02_12_000008_create_settings_table', 1),
-(11, '2024_02_12_000009_create_countries_table', 1),
-(12, '2024_02_12_000010_create_cities_table', 1),
-(13, '2024_02_12_000011_create_regions_table', 1),
-(14, '2024_02_12_000012_create_testimonials_table', 1),
-(15, '2024_02_12_000013_create_newsletters_table', 1),
-(16, '2024_02_12_000014_create_pages_table', 1),
-(17, '2024_02_12_000015_create_contactus_table', 1),
-(18, '2024_02_12_000016_create_user_alerts_table', 1),
-(19, '2024_02_12_000017_create_content_categories_table', 1),
-(20, '2024_02_12_000018_create_content_tags_table', 1),
-(21, '2024_02_12_000019_create_content_pages_table', 1),
-(22, '2024_02_12_000020_create_views_table', 1),
-(23, '2024_02_12_000021_create_finish_types_table', 1),
-(24, '2024_02_12_000022_create_sliders_table', 1),
-(25, '2024_02_12_000023_create_services_table', 1),
-(26, '2024_02_12_000024_create_events_table', 1),
-(27, '2024_02_12_000025_create_eventtags_table', 1),
-(28, '2024_02_12_000026_create_event_categories_table', 1),
-(29, '2024_02_12_000027_create_eventuserstatuses_table', 1),
-(30, '2024_02_12_000028_create_eventjoiningusers_table', 1),
-(31, '2024_02_12_000029_create_event_discussions_table', 1),
-(32, '2024_02_12_000030_create_projects_table', 1),
-(33, '2024_02_12_000031_create_real_estate_units_table', 1),
-(34, '2024_02_12_000032_create_real_estate_applications_table', 1),
-(35, '2024_02_12_000033_create_applications_request_sections_table', 1),
-(36, '2024_02_12_000034_create_real_estate_types_table', 1),
-(37, '2024_02_12_000035_create_payment_methods_table', 1),
-(38, '2024_02_12_000036_create_available_for_mortgages_table', 1),
-(39, '2024_02_12_000037_create_realstate_purposes_table', 1),
-(40, '2024_02_12_000038_create_amenities_table', 1),
-(41, '2024_02_12_000039_create_nears_table', 1),
-(42, '2024_02_12_000040_create_book_meetings_table', 1),
-(43, '2024_02_12_000041_create_likes_table', 1),
-(44, '2024_02_12_000042_create_unit_comments_table', 1),
-(45, '2024_02_12_000043_create_permission_role_pivot_table', 1),
-(46, '2024_02_12_000044_create_role_user_pivot_table', 1),
-(47, '2024_02_12_000045_create_user_user_alert_pivot_table', 1),
-(48, '2024_02_12_000046_create_content_category_content_page_pivot_table', 1),
-(49, '2024_02_12_000047_create_content_page_content_tag_pivot_table', 1),
-(50, '2024_02_12_000048_create_event_eventtag_pivot_table', 1),
-(51, '2024_02_12_000049_create_amenity_real_estate_unit_pivot_table', 1),
-(52, '2024_02_12_000050_create_near_real_estate_unit_pivot_table', 1),
-(53, '2024_02_12_000051_add_relationship_fields_to_faq_questions_table', 1),
-(54, '2024_02_12_000052_add_relationship_fields_to_cities_table', 1),
-(55, '2024_02_12_000053_add_relationship_fields_to_regions_table', 1),
-(56, '2024_02_12_000054_add_relationship_fields_to_events_table', 1),
-(57, '2024_02_12_000055_add_relationship_fields_to_eventjoiningusers_table', 1),
-(58, '2024_02_12_000056_add_relationship_fields_to_event_discussions_table', 1),
-(59, '2024_02_12_000057_add_relationship_fields_to_projects_table', 1),
-(60, '2024_02_12_000058_add_relationship_fields_to_real_estate_units_table', 1),
-(61, '2024_02_12_000059_add_relationship_fields_to_real_estate_applications_table', 1),
-(62, '2024_02_12_000060_add_relationship_fields_to_book_meetings_table', 1),
-(63, '2024_02_12_000061_add_relationship_fields_to_likes_table', 1),
-(64, '2024_02_12_000062_add_relationship_fields_to_unit_comments_table', 1),
-(65, '2024_02_12_000063_add_verification_fields', 1),
-(66, '2024_02_12_000064_add_approval_fields', 1),
-(67, '2024_02_12_000065_create_qa_topics_table', 1),
-(68, '2024_02_12_000066_create_qa_messages_table', 1);
+(3, '2024_02_15_000001_create_audit_logs_table', 1),
+(4, '2024_02_15_000002_create_media_table', 1),
+(5, '2024_02_15_000003_create_permissions_table', 1),
+(6, '2024_02_15_000004_create_roles_table', 1),
+(7, '2024_02_15_000005_create_users_table', 1),
+(8, '2024_02_15_000006_create_faq_categories_table', 1),
+(9, '2024_02_15_000007_create_faq_questions_table', 1),
+(10, '2024_02_15_000008_create_settings_table', 1),
+(11, '2024_02_15_000009_create_countries_table', 1),
+(12, '2024_02_15_000010_create_cities_table', 1),
+(13, '2024_02_15_000011_create_regions_table', 1),
+(14, '2024_02_15_000012_create_testimonials_table', 1),
+(15, '2024_02_15_000013_create_newsletters_table', 1),
+(16, '2024_02_15_000014_create_pages_table', 1),
+(17, '2024_02_15_000015_create_contactus_table', 1),
+(18, '2024_02_15_000016_create_user_alerts_table', 1),
+(19, '2024_02_15_000017_create_content_categories_table', 1),
+(20, '2024_02_15_000018_create_content_tags_table', 1),
+(21, '2024_02_15_000019_create_content_pages_table', 1),
+(22, '2024_02_15_000020_create_views_table', 1),
+(23, '2024_02_15_000021_create_finish_types_table', 1),
+(24, '2024_02_15_000022_create_sliders_table', 1),
+(25, '2024_02_15_000023_create_services_table', 1),
+(26, '2024_02_15_000024_create_events_table', 1),
+(27, '2024_02_15_000025_create_eventtags_table', 1),
+(28, '2024_02_15_000026_create_event_categories_table', 1),
+(29, '2024_02_15_000027_create_eventuserstatuses_table', 1),
+(30, '2024_02_15_000028_create_eventjoiningusers_table', 1),
+(31, '2024_02_15_000029_create_event_discussions_table', 1),
+(32, '2024_02_15_000030_create_projects_table', 1),
+(33, '2024_02_15_000031_create_real_estate_units_table', 1),
+(34, '2024_02_15_000032_create_real_estate_applications_table', 1),
+(35, '2024_02_15_000033_create_applications_request_sections_table', 1),
+(36, '2024_02_15_000034_create_real_estate_types_table', 1),
+(37, '2024_02_15_000035_create_payment_methods_table', 1),
+(38, '2024_02_15_000036_create_available_for_mortgages_table', 1),
+(39, '2024_02_15_000037_create_realstate_purposes_table', 1),
+(40, '2024_02_15_000038_create_amenities_table', 1),
+(41, '2024_02_15_000039_create_nears_table', 1),
+(42, '2024_02_15_000040_create_book_meetings_table', 1),
+(43, '2024_02_15_000041_create_likes_table', 1),
+(44, '2024_02_15_000042_create_unit_comments_table', 1),
+(45, '2024_02_15_000043_create_project_types_table', 1),
+(46, '2024_02_15_000044_create_permission_role_pivot_table', 1),
+(47, '2024_02_15_000045_create_role_user_pivot_table', 1),
+(48, '2024_02_15_000046_create_user_user_alert_pivot_table', 1),
+(49, '2024_02_15_000047_create_content_category_content_page_pivot_table', 1),
+(50, '2024_02_15_000048_create_content_page_content_tag_pivot_table', 1),
+(51, '2024_02_15_000049_create_event_eventtag_pivot_table', 1),
+(52, '2024_02_15_000050_create_near_project_pivot_table', 1),
+(53, '2024_02_15_000051_create_amenity_real_estate_unit_pivot_table', 1),
+(54, '2024_02_15_000052_create_near_real_estate_unit_pivot_table', 1),
+(55, '2024_02_15_000053_create_real_estate_unit_realstate_purpose_pivot_table', 1),
+(56, '2024_02_15_000054_create_payment_method_real_estate_unit_pivot_table', 1),
+(57, '2024_02_15_000055_create_real_estate_type_real_estate_unit_pivot_table', 1),
+(58, '2024_02_15_000056_create_available_for_mortgage_real_estate_application_pivot_table', 1),
+(59, '2024_02_15_000057_create_payment_method_real_estate_application_pivot_table', 1),
+(60, '2024_02_15_000058_create_real_estate_application_real_estate_type_pivot_table', 1),
+(61, '2024_02_15_000059_create_real_estate_application_view_pivot_table', 1),
+(62, '2024_02_15_000060_create_finish_type_real_estate_application_pivot_table', 1),
+(63, '2024_02_15_000061_add_relationship_fields_to_faq_questions_table', 1),
+(64, '2024_02_15_000062_add_relationship_fields_to_cities_table', 1),
+(65, '2024_02_15_000063_add_relationship_fields_to_regions_table', 1),
+(66, '2024_02_15_000064_add_relationship_fields_to_events_table', 1),
+(67, '2024_02_15_000065_add_relationship_fields_to_eventjoiningusers_table', 1),
+(68, '2024_02_15_000066_add_relationship_fields_to_event_discussions_table', 1),
+(69, '2024_02_15_000067_add_relationship_fields_to_projects_table', 1),
+(70, '2024_02_15_000068_add_relationship_fields_to_real_estate_units_table', 1),
+(71, '2024_02_15_000069_add_relationship_fields_to_real_estate_applications_table', 1),
+(72, '2024_02_15_000070_add_relationship_fields_to_book_meetings_table', 1),
+(73, '2024_02_15_000071_add_relationship_fields_to_likes_table', 1),
+(74, '2024_02_15_000072_add_relationship_fields_to_unit_comments_table', 1),
+(75, '2024_02_15_000073_add_verification_fields', 1),
+(76, '2024_02_15_000074_add_approval_fields', 1),
+(77, '2024_02_15_000075_create_qa_topics_table', 1),
+(78, '2024_02_15_000076_create_qa_messages_table', 1);
 
 -- --------------------------------------------------------
 
@@ -777,13 +943,44 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `nears` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `nears`
+--
+
+INSERT INTO `nears` (`id`, `title`, `active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'HOSPITALS', 1, '2024-02-14 16:07:00', '2024-02-14 16:07:00', NULL),
+(2, 'SCHOOLS', 1, '2024-02-14 16:07:13', '2024-02-14 16:07:13', NULL),
+(3, 'RESTAURANTS', 1, '2024-02-14 16:07:25', '2024-02-14 16:07:25', NULL),
+(4, 'PARKS', 1, '2024-02-14 16:07:35', '2024-02-14 16:07:35', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `near_project`
+--
+
+CREATE TABLE `near_project` (
+  `project_id` bigint(20) UNSIGNED NOT NULL,
+  `near_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `near_project`
+--
+
+INSERT INTO `near_project` (`project_id`, `near_id`) VALUES
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4);
 
 -- --------------------------------------------------------
 
@@ -792,9 +989,19 @@ CREATE TABLE `nears` (
 --
 
 CREATE TABLE `near_real_estate_unit` (
-  `real_estate_unit_id` bigint UNSIGNED NOT NULL,
-  `near_id` bigint UNSIGNED NOT NULL
+  `real_estate_unit_id` bigint(20) UNSIGNED NOT NULL,
+  `near_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `near_real_estate_unit`
+--
+
+INSERT INTO `near_real_estate_unit` (`real_estate_unit_id`, `near_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4);
 
 -- --------------------------------------------------------
 
@@ -803,8 +1010,8 @@ CREATE TABLE `near_real_estate_unit` (
 --
 
 CREATE TABLE `newsletters` (
-  `id` bigint UNSIGNED NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `email` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -817,12 +1024,12 @@ CREATE TABLE `newsletters` (
 --
 
 CREATE TABLE `pages` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title_ar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description_ar` longtext COLLATE utf8mb4_unicode_ci,
-  `description_en` longtext COLLATE utf8mb4_unicode_ci,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title_ar` varchar(255) NOT NULL,
+  `title_en` varchar(255) NOT NULL,
+  `description_ar` longtext DEFAULT NULL,
+  `description_en` longtext DEFAULT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -835,8 +1042,8 @@ CREATE TABLE `pages` (
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -847,13 +1054,50 @@ CREATE TABLE `password_resets` (
 --
 
 CREATE TABLE `payment_methods` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payment_methods`
+--
+
+INSERT INTO `payment_methods` (`id`, `title`, `active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Cash', 1, '2024-02-14 12:10:40', '2024-02-14 12:10:40', NULL),
+(2, 'Online', 1, '2024-02-14 12:10:48', '2024-02-14 12:10:48', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_method_real_estate_application`
+--
+
+CREATE TABLE `payment_method_real_estate_application` (
+  `real_estate_application_id` bigint(20) UNSIGNED NOT NULL,
+  `payment_method_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_method_real_estate_unit`
+--
+
+CREATE TABLE `payment_method_real_estate_unit` (
+  `real_estate_unit_id` bigint(20) UNSIGNED NOT NULL,
+  `payment_method_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payment_method_real_estate_unit`
+--
+
+INSERT INTO `payment_method_real_estate_unit` (`real_estate_unit_id`, `payment_method_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -862,8 +1106,8 @@ CREATE TABLE `payment_methods` (
 --
 
 CREATE TABLE `permissions` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1082,7 +1326,12 @@ INSERT INTO `permissions` (`id`, `title`, `created_at`, `updated_at`, `deleted_a
 (206, 'unit_comment_delete', NULL, NULL, NULL),
 (207, 'unit_comment_access', NULL, NULL, NULL),
 (208, 'form_request_access', NULL, NULL, NULL),
-(209, 'profile_password_edit', NULL, NULL, NULL);
+(209, 'project_type_create', NULL, NULL, NULL),
+(210, 'project_type_edit', NULL, NULL, NULL),
+(211, 'project_type_show', NULL, NULL, NULL),
+(212, 'project_type_delete', NULL, NULL, NULL),
+(213, 'project_type_access', NULL, NULL, NULL),
+(214, 'profile_password_edit', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1091,8 +1340,8 @@ INSERT INTO `permissions` (`id`, `title`, `created_at`, `updated_at`, `deleted_a
 --
 
 CREATE TABLE `permission_role` (
-  `role_id` bigint UNSIGNED NOT NULL,
-  `permission_id` bigint UNSIGNED NOT NULL
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `permission_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1309,6 +1558,11 @@ INSERT INTO `permission_role` (`role_id`, `permission_id`) VALUES
 (1, 207),
 (1, 208),
 (1, 209),
+(1, 210),
+(1, 211),
+(1, 212),
+(1, 213),
+(1, 214),
 (2, 17),
 (2, 18),
 (2, 19),
@@ -1497,7 +1751,12 @@ INSERT INTO `permission_role` (`role_id`, `permission_id`) VALUES
 (2, 206),
 (2, 207),
 (2, 208),
-(2, 209);
+(2, 209),
+(2, 210),
+(2, 211),
+(2, 212),
+(2, 213),
+(2, 214);
 
 -- --------------------------------------------------------
 
@@ -1506,12 +1765,12 @@ INSERT INTO `permission_role` (`role_id`, `permission_id`) VALUES
 --
 
 CREATE TABLE `personal_access_tokens` (
-  `id` bigint UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1525,18 +1784,56 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 CREATE TABLE `projects` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lang` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `location_link` longtext COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
+  `status` varchar(255) DEFAULT NULL,
+  `lat` varchar(255) DEFAULT NULL,
+  `lang` varchar(255) DEFAULT NULL,
+  `location_link` longtext DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `addresse` varchar(255) DEFAULT NULL,
+  `featured` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `city_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `project_type_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `plan_title` text DEFAULT NULL,
+  `second_title` text DEFAULT NULL,
+  `second_description` longtext DEFAULT NULL,
+  `plan_description` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `title`, `active`, `status`, `lat`, `lang`, `location_link`, `description`, `addresse`, `featured`, `created_at`, `updated_at`, `deleted_at`, `user_id`, `city_id`, `project_type_id`, `plan_title`, `second_title`, `second_description`, `plan_description`) VALUES
+(2, 'Nile business city', 1, 'active', NULL, NULL, NULL, '<p>We are never satisfied with what we have accomplished, but we always strive to achieve the best by unleashing our dreams and aspirations for the future of urban development in Egypt. We focus on improving the quality of life in its social, economic and environmental sense, through the establishment of huge projects based on the genius of design and modern technology; In order to remain prominent and distinguished landmarks at the local and international levels over time for future generations.</p>', 'ddddd dddd ddddd', 'active', '2024-02-17 15:20:53', '2024-02-18 19:51:03', NULL, 2, 1, 1, 'Master plan', 'Welcome to Nile Business City', '<p>The tallest skyscraper in the golden point of the New Administrative Capital in the middle of the Green River and the center of the downtown area, with a height of 233 meters and with the widest facade on the northern Bin Zayed Axis, with a width of 200 meters.</p>', 'Nile Business City complex is located in the heart of the golden spot the New Administrative capital With a strategic location that is pinpointed in the center of the river and directly on the Mohammed Bin Zayed AxisOne can’t miss this striking 55-floor business city that is directly situated in the middle of the Downtown district, in the heart of the New Administrative  business community. Only a 20-minute drive from New Cairo, Nile Business city multiple access points through Road 90, Suez and Sokhna roads It is a five-minute drive along the axes of The Grand Mosque, Cathedral, Al Masa hotel and The Presidential Palace.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project_types`
+--
+
+CREATE TABLE `project_types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `project_types`
+--
+
+INSERT INTO `project_types` (`id`, `title`, `active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'dssd', 1, '2024-02-15 20:13:18', '2024-02-15 20:13:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -1545,11 +1842,11 @@ CREATE TABLE `projects` (
 --
 
 CREATE TABLE `qa_messages` (
-  `id` bigint UNSIGNED NOT NULL,
-  `topic_id` bigint UNSIGNED NOT NULL,
-  `sender_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `topic_id` bigint(20) UNSIGNED NOT NULL,
+  `sender_id` bigint(20) UNSIGNED NOT NULL,
   `read_at` timestamp NULL DEFAULT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1561,10 +1858,10 @@ CREATE TABLE `qa_messages` (
 --
 
 CREATE TABLE `qa_topics` (
-  `id` bigint UNSIGNED NOT NULL,
-  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `creator_id` bigint UNSIGNED NOT NULL,
-  `receiver_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `creator_id` bigint(20) UNSIGNED NOT NULL,
+  `receiver_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1576,13 +1873,22 @@ CREATE TABLE `qa_topics` (
 --
 
 CREATE TABLE `realstate_purposes` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `realstate_purposes`
+--
+
+INSERT INTO `realstate_purposes` (`id`, `title`, `active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'sale', 1, '2024-02-13 15:35:00', '2024-02-13 15:35:00', NULL),
+(2, 'rent', 1, '2024-02-13 15:35:06', '2024-02-13 15:35:06', NULL),
+(3, 'resale', 1, '2024-02-13 15:35:12', '2024-02-13 15:35:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -1591,31 +1897,67 @@ CREATE TABLE `realstate_purposes` (
 --
 
 CREATE TABLE `real_estate_applications` (
-  `id` bigint UNSIGNED NOT NULL,
-  `addresse` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `addresse` varchar(255) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
   `max_price` decimal(15,2) DEFAULT NULL,
   `min_price` decimal(15,2) DEFAULT NULL,
-  `deliver_year` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `number_of_rooms` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `floor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `notes` longtext COLLATE utf8mb4_unicode_ci,
-  `purpose_of_request` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `time_of_call` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deliver_year` varchar(255) DEFAULT NULL,
+  `number_of_rooms` varchar(255) DEFAULT NULL,
+  `floor` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
+  `user_phone` varchar(255) DEFAULT NULL,
+  `notes` longtext DEFAULT NULL,
+  `time_of_call` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `purpose_of_request` varchar(255) DEFAULT NULL,
+  `min_area` varchar(255) DEFAULT NULL,
+  `max_area` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `view_id` bigint UNSIGNED DEFAULT NULL,
-  `finish_type_id` bigint UNSIGNED DEFAULT NULL,
-  `type_id` bigint UNSIGNED DEFAULT NULL,
-  `section_id` bigint UNSIGNED DEFAULT NULL,
-  `payment_method_id` bigint UNSIGNED DEFAULT NULL,
-  `listings_available_for_mortgage_id` bigint UNSIGNED DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `real_estate_applications`
+--
+
+INSERT INTO `real_estate_applications` (`id`, `addresse`, `location`, `max_price`, `min_price`, `deliver_year`, `number_of_rooms`, `floor`, `user_name`, `user_phone`, `notes`, `time_of_call`, `email`, `purpose_of_request`, `min_area`, `max_area`, `created_at`, `updated_at`, `deleted_at`, `user_id`) VALUES
+(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 05:26:02', '2024-02-13 05:26:02', NULL, NULL),
+(2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'asd', NULL, NULL, NULL, NULL, '2024-02-14 14:59:26', '2024-02-14 14:59:26', NULL, NULL),
+(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'hany@mail.com', NULL, NULL, NULL, '2024-02-17 13:46:55', '2024-02-17 13:46:55', NULL, NULL),
+(4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'cosicyqide@mailinator.com', NULL, NULL, NULL, '2024-02-18 18:37:42', '2024-02-18 18:37:42', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `real_estate_application_real_estate_type`
+--
+
+CREATE TABLE `real_estate_application_real_estate_type` (
+  `real_estate_application_id` bigint(20) UNSIGNED NOT NULL,
+  `real_estate_type_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `real_estate_application_view`
+--
+
+CREATE TABLE `real_estate_application_view` (
+  `real_estate_application_id` bigint(20) UNSIGNED NOT NULL,
+  `view_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `real_estate_application_view`
+--
+
+INSERT INTO `real_estate_application_view` (`real_estate_application_id`, `view_id`) VALUES
+(2, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -1624,13 +1966,50 @@ CREATE TABLE `real_estate_applications` (
 --
 
 CREATE TABLE `real_estate_types` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `real_estate_types`
+--
+
+INSERT INTO `real_estate_types` (`id`, `title`, `active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Apartments', 1, '2024-02-13 19:53:14', '2024-02-13 19:53:14', NULL),
+(2, 'Furnished Apartment', 1, '2024-02-13 19:53:25', '2024-02-13 19:53:25', NULL),
+(3, 'Chalets', 1, '2024-02-13 19:53:34', '2024-02-13 19:53:34', NULL),
+(4, 'Villas', 1, '2024-02-13 19:53:43', '2024-02-13 19:53:43', NULL),
+(5, 'Land', 1, '2024-02-13 19:54:16', '2024-02-13 19:54:16', NULL),
+(6, 'Building', 1, '2024-02-13 19:54:24', '2024-02-13 19:54:24', NULL),
+(7, 'Commercial', 1, '2024-02-13 19:54:31', '2024-02-13 19:54:31', NULL),
+(8, 'Administrative', 1, '2024-02-13 19:54:40', '2024-02-13 19:54:40', NULL),
+(9, 'Medical', 1, '2024-02-13 19:54:48', '2024-02-13 19:54:48', NULL),
+(10, 'Shared Room', 1, '2024-02-13 19:54:56', '2024-02-13 19:54:56', NULL),
+(11, 'Other', 1, '2024-02-13 19:55:04', '2024-02-13 19:55:04', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `real_estate_type_real_estate_unit`
+--
+
+CREATE TABLE `real_estate_type_real_estate_unit` (
+  `real_estate_unit_id` bigint(20) UNSIGNED NOT NULL,
+  `real_estate_type_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `real_estate_type_real_estate_unit`
+--
+
+INSERT INTO `real_estate_type_real_estate_unit` (`real_estate_unit_id`, `real_estate_type_id`) VALUES
+(1, 1),
+(1, 4),
+(1, 5);
 
 -- --------------------------------------------------------
 
@@ -1639,33 +2018,83 @@ CREATE TABLE `real_estate_types` (
 --
 
 CREATE TABLE `real_estate_units` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `featured` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `premium` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `location_link` longtext COLLATE utf8mb4_unicode_ci,
-  `lat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lang` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `number_of_room` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `number_of_floor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `number_of_bath_room` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `number_of_master_room` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `notes` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `has_garage` tinyint(1) DEFAULT '0',
-  `number_of_garage` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `features` longtext COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` longtext DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `price` varchar(255) DEFAULT NULL,
+  `featured` varchar(255) DEFAULT NULL,
+  `premium` varchar(255) DEFAULT NULL,
+  `location_link` longtext DEFAULT NULL,
+  `lat` varchar(255) DEFAULT NULL,
+  `lang` varchar(255) DEFAULT NULL,
+  `number_of_room` varchar(255) DEFAULT NULL,
+  `number_of_floor` varchar(255) DEFAULT NULL,
+  `number_of_bath_room` varchar(255) DEFAULT NULL,
+  `number_of_master_room` varchar(255) DEFAULT NULL,
+  `notes` varchar(255) DEFAULT NULL,
+  `has_garage` tinyint(1) DEFAULT 0,
+  `number_of_garage` varchar(255) DEFAULT NULL,
+  `features` longtext DEFAULT NULL,
+  `address` longtext DEFAULT NULL,
+  `bua` varchar(255) DEFAULT NULL,
+  `ror` varchar(255) DEFAULT NULL,
+  `roi` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `project_id` bigint UNSIGNED DEFAULT NULL,
-  `purpose_id` bigint UNSIGNED DEFAULT NULL,
-  `payment_id` bigint UNSIGNED DEFAULT NULL,
-  `type_id` bigint UNSIGNED DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL
+  `project_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `real_estate_units`
+--
+
+INSERT INTO `real_estate_units` (`id`, `title`, `description`, `status`, `price`, `featured`, `premium`, `location_link`, `lat`, `lang`, `number_of_room`, `number_of_floor`, `number_of_bath_room`, `number_of_master_room`, `notes`, `has_garage`, `number_of_garage`, `features`, `address`, `bua`, `ror`, `roi`, `created_at`, `updated_at`, `deleted_at`, `project_id`, `user_id`, `city_id`) VALUES
+(1, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-13 21:14:26', '2024-02-19 14:52:09', NULL, NULL, 2, 1),
+(11, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(12, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(13, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(14, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(15, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(16, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(17, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(18, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(19, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(20, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(21, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(22, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(23, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(24, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(25, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(26, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(27, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(28, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(29, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(30, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(31, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL),
+(32, 'Reserve Way New Braunfels, Texas', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', 'published', '780000', 'yes', 'yes', 'Qui ut minim est ips', 'Pariatur Aliquam vo', 'Consequatur exceptu', '3', '3', '2', '1', 'Reprehenderit volupt', 1, '1', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'The standard chunk of Lorem Ipsum used since the 1500s', '22', '22', '22', '2024-02-14 04:14:26', '2024-02-16 05:11:01', NULL, NULL, 2, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `real_estate_unit_realstate_purpose`
+--
+
+CREATE TABLE `real_estate_unit_realstate_purpose` (
+  `real_estate_unit_id` bigint(20) UNSIGNED NOT NULL,
+  `realstate_purpose_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `real_estate_unit_realstate_purpose`
+--
+
+INSERT INTO `real_estate_unit_realstate_purpose` (`real_estate_unit_id`, `realstate_purpose_id`) VALUES
+(1, 1),
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -1674,13 +2103,13 @@ CREATE TABLE `real_estate_units` (
 --
 
 CREATE TABLE `regions` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title_ar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title_ar` varchar(255) DEFAULT NULL,
+  `title_en` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `city_id` bigint UNSIGNED DEFAULT NULL
+  `city_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1690,10 +2119,10 @@ CREATE TABLE `regions` (
 --
 
 CREATE TABLE `roles` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `show_in_website` tinyint(1) DEFAULT '0',
-  `active` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `show_in_website` tinyint(1) DEFAULT 0,
+  `active` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1714,8 +2143,8 @@ INSERT INTO `roles` (`id`, `title`, `show_in_website`, `active`, `created_at`, `
 --
 
 CREATE TABLE `role_user` (
-  `user_id` bigint UNSIGNED NOT NULL,
-  `role_id` bigint UNSIGNED NOT NULL
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1732,10 +2161,10 @@ INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
 --
 
 CREATE TABLE `services` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1748,17 +2177,17 @@ CREATE TABLE `services` (
 --
 
 CREATE TABLE `settings` (
-  `id` bigint UNSIGNED NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fb` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `twitter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `linkin` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `youtube` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `instgram` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `snap` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `site_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `fb` varchar(255) DEFAULT NULL,
+  `twitter` varchar(255) DEFAULT NULL,
+  `linkin` varchar(255) DEFAULT NULL,
+  `youtube` varchar(255) DEFAULT NULL,
+  `instgram` varchar(255) DEFAULT NULL,
+  `snap` varchar(255) DEFAULT NULL,
+  `site_title` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1771,11 +2200,11 @@ CREATE TABLE `settings` (
 --
 
 CREATE TABLE `sliders` (
-  `id` bigint UNSIGNED NOT NULL,
-  `head_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `link_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `head_title` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `link_title` varchar(255) DEFAULT NULL,
+  `link` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1788,10 +2217,10 @@ CREATE TABLE `sliders` (
 --
 
 CREATE TABLE `testimonials` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `position` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1804,13 +2233,13 @@ CREATE TABLE `testimonials` (
 --
 
 CREATE TABLE `unit_comments` (
-  `id` bigint UNSIGNED NOT NULL,
-  `comment` longtext COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `comment` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `unit_id` bigint UNSIGNED DEFAULT NULL
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `unit_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1820,21 +2249,21 @@ CREATE TABLE `unit_comments` (
 --
 
 CREATE TABLE `users` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `email_verified_at` datetime DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `approved` tinyint(1) DEFAULT '0',
-  `verified` tinyint(1) DEFAULT '0',
+  `password` varchar(255) DEFAULT NULL,
+  `approved` tinyint(1) DEFAULT 0,
+  `verified` tinyint(1) DEFAULT 0,
   `verified_at` datetime DEFAULT NULL,
-  `verification_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` int DEFAULT NULL,
-  `device` longtext COLLATE utf8mb4_unicode_ci,
-  `device_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `active` tinyint(1) DEFAULT '0',
-  `notifcation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `verification_token` varchar(255) DEFAULT NULL,
+  `remember_token` varchar(255) DEFAULT NULL,
+  `phone` int(11) DEFAULT NULL,
+  `device` longtext DEFAULT NULL,
+  `device_type` varchar(255) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT 0,
+  `notifcation` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1845,7 +2274,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `approved`, `verified`, `verified_at`, `verification_token`, `remember_token`, `phone`, `device`, `device_type`, `active`, `notifcation`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Admin', 'admin@admin.com', NULL, '$2y$10$BoKRqKLlraSi2Z1MS84TieJNZaue74H0gDRKfGi1O4g13v87Quqpq', 1, 1, '2024-01-26 19:08:02', '', NULL, NULL, NULL, '', 0, '', NULL, NULL, NULL);
+(1, 'Admin', 'admin@admin.com', NULL, '$2y$10$IdJeoQdSuKmff0tDdrlHTO0Ol0FuigPqvgHR81HYmJVt1EhwvkWyK', 1, 1, '2024-01-26 19:08:02', '', NULL, NULL, NULL, '', 0, '', NULL, NULL, NULL),
+(2, 'Vstate', 'Vstate@Vstate.com', NULL, '$2y$10$GGiF7xEqDdQxRVV0VDfxi.V5D50dTQDBoklfuu94Tx2D1M53R6BIS', 1, 1, '2024-02-14 11:05:02', NULL, NULL, 223089785, NULL, NULL, 1, NULL, '2024-02-14 16:05:02', '2024-02-14 16:05:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -1854,9 +2284,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ap
 --
 
 CREATE TABLE `user_alerts` (
-  `id` bigint UNSIGNED NOT NULL,
-  `alert_text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alert_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `alert_text` varchar(255) NOT NULL,
+  `alert_link` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1868,9 +2298,9 @@ CREATE TABLE `user_alerts` (
 --
 
 CREATE TABLE `user_user_alert` (
-  `user_alert_id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `read` tinyint(1) NOT NULL DEFAULT '0'
+  `user_alert_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `read` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1880,13 +2310,32 @@ CREATE TABLE `user_user_alert` (
 --
 
 CREATE TABLE `views` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `views`
+--
+
+INSERT INTO `views` (`id`, `title`, `active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Main Street', 1, '2024-02-13 19:55:24', '2024-02-13 19:55:24', NULL),
+(2, 'Side Street', 1, '2024-02-13 19:55:37', '2024-02-13 19:55:37', NULL),
+(3, 'Corner', 1, '2024-02-13 19:55:47', '2024-02-13 19:55:47', NULL),
+(4, 'Back', 1, '2024-02-13 19:55:55', '2024-02-13 19:55:55', NULL),
+(5, 'Garden', 1, '2024-02-13 19:56:04', '2024-02-13 19:56:04', NULL),
+(6, 'Pool', 1, '2024-02-13 19:56:14', '2024-02-13 19:56:14', NULL),
+(7, 'Seaview', 1, '2024-02-13 19:56:22', '2024-02-13 19:56:22', NULL),
+(8, 'Nile', 1, '2024-02-13 19:56:30', '2024-02-13 19:56:30', NULL),
+(9, 'Golf', 1, '2024-02-13 19:56:40', '2024-02-13 19:56:40', NULL),
+(10, 'Plaza', 1, '2024-02-13 19:56:48', '2024-02-13 19:56:48', NULL),
+(11, 'Club', 1, '2024-02-13 19:56:55', '2024-02-13 19:56:55', NULL),
+(12, 'Lake', 1, '2024-02-13 19:57:03', '2024-02-13 19:57:03', NULL),
+(13, 'Other', 1, '2024-02-13 19:57:10', '2024-02-13 19:57:10', NULL);
 
 --
 -- Indexes for dumped tables
@@ -1924,12 +2373,20 @@ ALTER TABLE `available_for_mortgages`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `available_for_mortgage_real_estate_application`
+--
+ALTER TABLE `available_for_mortgage_real_estate_application`
+  ADD KEY `real_estate_application_id_fk_9494515` (`real_estate_application_id`),
+  ADD KEY `available_for_mortgage_id_fk_9494515` (`available_for_mortgage_id`);
+
+--
 -- Indexes for table `book_meetings`
 --
 ALTER TABLE `book_meetings`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_fk_9469772` (`user_id`),
-  ADD KEY `unit_fk_9469773` (`unit_id`);
+  ADD KEY `unit_fk_9469773` (`unit_id`),
+  ADD KEY `project_fk_9504208` (`project_id`);
 
 --
 -- Indexes for table `cities`
@@ -2054,6 +2511,13 @@ ALTER TABLE `finish_types`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `finish_type_real_estate_application`
+--
+ALTER TABLE `finish_type_real_estate_application`
+  ADD KEY `real_estate_application_id_fk_9494543` (`real_estate_application_id`),
+  ADD KEY `finish_type_id_fk_9494543` (`finish_type_id`);
+
+--
 -- Indexes for table `likes`
 --
 ALTER TABLE `likes`
@@ -2081,6 +2545,13 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `nears`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `near_project`
+--
+ALTER TABLE `near_project`
+  ADD KEY `project_id_fk_9504206` (`project_id`),
+  ADD KEY `near_id_fk_9504206` (`near_id`);
 
 --
 -- Indexes for table `near_real_estate_unit`
@@ -2114,6 +2585,20 @@ ALTER TABLE `payment_methods`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `payment_method_real_estate_application`
+--
+ALTER TABLE `payment_method_real_estate_application`
+  ADD KEY `real_estate_application_id_fk_9494517` (`real_estate_application_id`),
+  ADD KEY `payment_method_id_fk_9494517` (`payment_method_id`);
+
+--
+-- Indexes for table `payment_method_real_estate_unit`
+--
+ALTER TABLE `payment_method_real_estate_unit`
+  ADD KEY `real_estate_unit_id_fk_9496855` (`real_estate_unit_id`),
+  ADD KEY `payment_method_id_fk_9496855` (`payment_method_id`);
+
+--
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
@@ -2139,7 +2624,15 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `projects`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_fk_9441606` (`user_id`);
+  ADD KEY `user_fk_9441606` (`user_id`),
+  ADD KEY `city_fk_9504205` (`city_id`),
+  ADD KEY `project_type_fk_9504216` (`project_type_id`);
+
+--
+-- Indexes for table `project_types`
+--
+ALTER TABLE `project_types`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `qa_messages`
@@ -2168,13 +2661,21 @@ ALTER TABLE `realstate_purposes`
 --
 ALTER TABLE `real_estate_applications`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `view_fk_9441779` (`view_id`),
-  ADD KEY `finish_type_fk_9441780` (`finish_type_id`),
-  ADD KEY `type_fk_9441821` (`type_id`),
-  ADD KEY `section_fk_9441875` (`section_id`),
-  ADD KEY `payment_method_fk_9441883` (`payment_method_id`),
-  ADD KEY `listings_available_for_mortgage_fk_9441890` (`listings_available_for_mortgage_id`),
   ADD KEY `user_fk_9493129` (`user_id`);
+
+--
+-- Indexes for table `real_estate_application_real_estate_type`
+--
+ALTER TABLE `real_estate_application_real_estate_type`
+  ADD KEY `real_estate_application_id_fk_9494540` (`real_estate_application_id`),
+  ADD KEY `real_estate_type_id_fk_9494540` (`real_estate_type_id`);
+
+--
+-- Indexes for table `real_estate_application_view`
+--
+ALTER TABLE `real_estate_application_view`
+  ADD KEY `real_estate_application_id_fk_9494541` (`real_estate_application_id`),
+  ADD KEY `view_id_fk_9494541` (`view_id`);
 
 --
 -- Indexes for table `real_estate_types`
@@ -2183,15 +2684,26 @@ ALTER TABLE `real_estate_types`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `real_estate_type_real_estate_unit`
+--
+ALTER TABLE `real_estate_type_real_estate_unit`
+  ADD KEY `real_estate_unit_id_fk_9496856` (`real_estate_unit_id`),
+  ADD KEY `real_estate_type_id_fk_9496856` (`real_estate_type_id`);
+
+--
 -- Indexes for table `real_estate_units`
 --
 ALTER TABLE `real_estate_units`
   ADD PRIMARY KEY (`id`),
   ADD KEY `project_fk_9441621` (`project_id`),
-  ADD KEY `purpose_fk_9441897` (`purpose_id`),
-  ADD KEY `payment_fk_9441898` (`payment_id`),
-  ADD KEY `type_fk_9441899` (`type_id`),
   ADD KEY `user_fk_9469352` (`user_id`);
+
+--
+-- Indexes for table `real_estate_unit_realstate_purpose`
+--
+ALTER TABLE `real_estate_unit_realstate_purpose`
+  ADD KEY `real_estate_unit_id_fk_9496854` (`real_estate_unit_id`),
+  ADD KEY `realstate_purpose_id_fk_9496854` (`realstate_purpose_id`);
 
 --
 -- Indexes for table `regions`
@@ -2279,277 +2791,283 @@ ALTER TABLE `views`
 -- AUTO_INCREMENT for table `amenities`
 --
 ALTER TABLE `amenities`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `applications_request_sections`
 --
 ALTER TABLE `applications_request_sections`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `audit_logs`
 --
 ALTER TABLE `audit_logs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `available_for_mortgages`
 --
 ALTER TABLE `available_for_mortgages`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `book_meetings`
 --
 ALTER TABLE `book_meetings`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `contactus`
 --
 ALTER TABLE `contactus`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `content_categories`
 --
 ALTER TABLE `content_categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `content_pages`
 --
 ALTER TABLE `content_pages`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `content_tags`
 --
 ALTER TABLE `content_tags`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
 -- AUTO_INCREMENT for table `eventjoiningusers`
 --
 ALTER TABLE `eventjoiningusers`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `eventtags`
 --
 ALTER TABLE `eventtags`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `eventuserstatuses`
 --
 ALTER TABLE `eventuserstatuses`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `event_categories`
 --
 ALTER TABLE `event_categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `event_discussions`
 --
 ALTER TABLE `event_discussions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `faq_categories`
 --
 ALTER TABLE `faq_categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `faq_questions`
 --
 ALTER TABLE `faq_questions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `finish_types`
 --
 ALTER TABLE `finish_types`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `nears`
 --
 ALTER TABLE `nears`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `newsletters`
 --
 ALTER TABLE `newsletters`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `project_types`
+--
+ALTER TABLE `project_types`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `qa_messages`
 --
 ALTER TABLE `qa_messages`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `qa_topics`
 --
 ALTER TABLE `qa_topics`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `realstate_purposes`
 --
 ALTER TABLE `realstate_purposes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `real_estate_applications`
 --
 ALTER TABLE `real_estate_applications`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `real_estate_types`
 --
 ALTER TABLE `real_estate_types`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `real_estate_units`
 --
 ALTER TABLE `real_estate_units`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `regions`
 --
 ALTER TABLE `regions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `sliders`
 --
 ALTER TABLE `sliders`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `testimonials`
 --
 ALTER TABLE `testimonials`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `unit_comments`
 --
 ALTER TABLE `unit_comments`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_alerts`
 --
 ALTER TABLE `user_alerts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `views`
 --
 ALTER TABLE `views`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -2563,9 +3081,17 @@ ALTER TABLE `amenity_real_estate_unit`
   ADD CONSTRAINT `real_estate_unit_id_fk_9469718` FOREIGN KEY (`real_estate_unit_id`) REFERENCES `real_estate_units` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `available_for_mortgage_real_estate_application`
+--
+ALTER TABLE `available_for_mortgage_real_estate_application`
+  ADD CONSTRAINT `available_for_mortgage_id_fk_9494515` FOREIGN KEY (`available_for_mortgage_id`) REFERENCES `available_for_mortgages` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `real_estate_application_id_fk_9494515` FOREIGN KEY (`real_estate_application_id`) REFERENCES `real_estate_applications` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `book_meetings`
 --
 ALTER TABLE `book_meetings`
+  ADD CONSTRAINT `project_fk_9504208` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`),
   ADD CONSTRAINT `unit_fk_9469773` FOREIGN KEY (`unit_id`) REFERENCES `real_estate_units` (`id`),
   ADD CONSTRAINT `user_fk_9469772` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
@@ -2627,6 +3153,13 @@ ALTER TABLE `faq_questions`
   ADD CONSTRAINT `category_fk_8884666` FOREIGN KEY (`category_id`) REFERENCES `faq_categories` (`id`);
 
 --
+-- Constraints for table `finish_type_real_estate_application`
+--
+ALTER TABLE `finish_type_real_estate_application`
+  ADD CONSTRAINT `finish_type_id_fk_9494543` FOREIGN KEY (`finish_type_id`) REFERENCES `finish_types` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `real_estate_application_id_fk_9494543` FOREIGN KEY (`real_estate_application_id`) REFERENCES `real_estate_applications` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `likes`
 --
 ALTER TABLE `likes`
@@ -2634,11 +3167,32 @@ ALTER TABLE `likes`
   ADD CONSTRAINT `user_fk_9469775` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
+-- Constraints for table `near_project`
+--
+ALTER TABLE `near_project`
+  ADD CONSTRAINT `near_id_fk_9504206` FOREIGN KEY (`near_id`) REFERENCES `nears` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `project_id_fk_9504206` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `near_real_estate_unit`
 --
 ALTER TABLE `near_real_estate_unit`
   ADD CONSTRAINT `near_id_fk_9469760` FOREIGN KEY (`near_id`) REFERENCES `nears` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `real_estate_unit_id_fk_9469760` FOREIGN KEY (`real_estate_unit_id`) REFERENCES `real_estate_units` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `payment_method_real_estate_application`
+--
+ALTER TABLE `payment_method_real_estate_application`
+  ADD CONSTRAINT `payment_method_id_fk_9494517` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `real_estate_application_id_fk_9494517` FOREIGN KEY (`real_estate_application_id`) REFERENCES `real_estate_applications` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `payment_method_real_estate_unit`
+--
+ALTER TABLE `payment_method_real_estate_unit`
+  ADD CONSTRAINT `payment_method_id_fk_9496855` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `real_estate_unit_id_fk_9496855` FOREIGN KEY (`real_estate_unit_id`) REFERENCES `real_estate_units` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `permission_role`
@@ -2651,6 +3205,8 @@ ALTER TABLE `permission_role`
 -- Constraints for table `projects`
 --
 ALTER TABLE `projects`
+  ADD CONSTRAINT `city_fk_9504205` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
+  ADD CONSTRAINT `project_type_fk_9504216` FOREIGN KEY (`project_type_id`) REFERENCES `project_types` (`id`),
   ADD CONSTRAINT `user_fk_9441606` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
@@ -2671,23 +3227,42 @@ ALTER TABLE `qa_topics`
 -- Constraints for table `real_estate_applications`
 --
 ALTER TABLE `real_estate_applications`
-  ADD CONSTRAINT `finish_type_fk_9441780` FOREIGN KEY (`finish_type_id`) REFERENCES `finish_types` (`id`),
-  ADD CONSTRAINT `listings_available_for_mortgage_fk_9441890` FOREIGN KEY (`listings_available_for_mortgage_id`) REFERENCES `available_for_mortgages` (`id`),
-  ADD CONSTRAINT `payment_method_fk_9441883` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`),
-  ADD CONSTRAINT `section_fk_9441875` FOREIGN KEY (`section_id`) REFERENCES `applications_request_sections` (`id`),
-  ADD CONSTRAINT `type_fk_9441821` FOREIGN KEY (`type_id`) REFERENCES `real_estate_types` (`id`),
-  ADD CONSTRAINT `user_fk_9493129` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `view_fk_9441779` FOREIGN KEY (`view_id`) REFERENCES `views` (`id`);
+  ADD CONSTRAINT `user_fk_9493129` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `real_estate_application_real_estate_type`
+--
+ALTER TABLE `real_estate_application_real_estate_type`
+  ADD CONSTRAINT `real_estate_application_id_fk_9494540` FOREIGN KEY (`real_estate_application_id`) REFERENCES `real_estate_applications` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `real_estate_type_id_fk_9494540` FOREIGN KEY (`real_estate_type_id`) REFERENCES `real_estate_types` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `real_estate_application_view`
+--
+ALTER TABLE `real_estate_application_view`
+  ADD CONSTRAINT `real_estate_application_id_fk_9494541` FOREIGN KEY (`real_estate_application_id`) REFERENCES `real_estate_applications` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `view_id_fk_9494541` FOREIGN KEY (`view_id`) REFERENCES `views` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `real_estate_type_real_estate_unit`
+--
+ALTER TABLE `real_estate_type_real_estate_unit`
+  ADD CONSTRAINT `real_estate_type_id_fk_9496856` FOREIGN KEY (`real_estate_type_id`) REFERENCES `real_estate_types` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `real_estate_unit_id_fk_9496856` FOREIGN KEY (`real_estate_unit_id`) REFERENCES `real_estate_units` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `real_estate_units`
 --
 ALTER TABLE `real_estate_units`
-  ADD CONSTRAINT `payment_fk_9441898` FOREIGN KEY (`payment_id`) REFERENCES `payment_methods` (`id`),
   ADD CONSTRAINT `project_fk_9441621` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`),
-  ADD CONSTRAINT `purpose_fk_9441897` FOREIGN KEY (`purpose_id`) REFERENCES `realstate_purposes` (`id`),
-  ADD CONSTRAINT `type_fk_9441899` FOREIGN KEY (`type_id`) REFERENCES `real_estate_types` (`id`),
   ADD CONSTRAINT `user_fk_9469352` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `real_estate_unit_realstate_purpose`
+--
+ALTER TABLE `real_estate_unit_realstate_purpose`
+  ADD CONSTRAINT `real_estate_unit_id_fk_9496854` FOREIGN KEY (`real_estate_unit_id`) REFERENCES `real_estate_units` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `realstate_purpose_id_fk_9496854` FOREIGN KEY (`realstate_purpose_id`) REFERENCES `realstate_purposes` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `regions`

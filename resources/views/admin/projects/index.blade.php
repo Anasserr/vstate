@@ -54,15 +54,15 @@
                     <td>
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        <input class="search form-control" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        <input class="search form-control" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                     </td>
                     <td>
-                        <select class="search">
+                        <select class="search form-control">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($users as $key => $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
@@ -72,7 +72,7 @@
                     <td>
                     </td>
                     <td>
-                        <select class="search" strict="true">
+                        <select class="search form-control" strict="true">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach(App\Models\Project::STATUS_SELECT as $key => $item)
                                 <option value="{{ $key }}">{{ $item }}</option>
@@ -80,7 +80,7 @@
                         </select>
                     </td>
                     <td>
-                        <select class="search" strict="true">
+                        <select class="search form-control" strict="true">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach(App\Models\Project::FEATURED_RADIO as $key => $item)
                                 <option value="{{ $key }}">{{ $item }}</option>
