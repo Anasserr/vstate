@@ -22,8 +22,19 @@ class SettingsController extends Controller
     {
         abort_if(Gate::denies('setting_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        if (count(Setting::all()) === 0) {
+            $setting =  Setting::create(
+                ['email' => 'email@email.com']
+            ) ;
+
+            return  redirect(url('/admin/settings/' . $setting->id . '/edit')) ;
+        }
+
+        $setting =  Setting::first() ;
+
+        return  redirect(url('/admin/settings/' . $setting->id . '/edit')) ;
         if ($request->ajax()) {
-            $query = Setting::query()->select(sprintf('%s.*', (new Setting)->table));
+            $query = Setting::query()->take(1)->select(sprintf('%s.*', (new Setting())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -122,7 +133,7 @@ class SettingsController extends Controller
         $setting->update($request->all());
 
         if ($request->input('logo', false)) {
-            if (! $setting->logo || $request->input('logo') !== $setting->logo->file_name) {
+            if (!$setting->logo || $request->input('logo') !== $setting->logo->file_name) {
                 if ($setting->logo) {
                     $setting->logo->delete();
                 }
@@ -133,7 +144,7 @@ class SettingsController extends Controller
         }
 
         if ($request->input('logo_white', false)) {
-            if (! $setting->logo_white || $request->input('logo_white') !== $setting->logo_white->file_name) {
+            if (!$setting->logo_white || $request->input('logo_white') !== $setting->logo_white->file_name) {
                 if ($setting->logo_white) {
                     $setting->logo_white->delete();
                 }

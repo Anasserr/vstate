@@ -109,8 +109,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'], 
 
     //////////////////////////////////////////////////////////////
     Route::post('login', 'AuthController@login');
-    Route::get('main_types', 'AuthController@mainTypes');
-    Route::get('user_types/{id}', 'AuthController@userTypes');
+    Route::get('main_types', 'AuthController@userTypes');
+    Route::get('user_types', 'AuthController@userTypes');
     Route::post('/register', 'AuthController@register');
     Route::post('/request-forgot-password-step-one', 'AuthController@requestForgotPasswordStepOne');
     Route::post('/send-another-forgot-password-code', 'AuthController@sendAnotherCode');

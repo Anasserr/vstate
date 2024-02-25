@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ApiLoginValidationParameters;
-use App\Http\Requests\ChangePasswordApiRequest;
-use App\Http\Requests\ForgotPassordFromApi;
-use App\Http\Requests\RegisterValidaterFromAPi;
-use App\Http\Requests\ResetPasswordFromAPiRequest;
-use App\Http\Requests\ValidateProfileEditAPi;
-use App\Http\Resources\Admin\RoleResource as AdminRoleResource;
+use Throwable;
+use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Throwable;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\Admin\UserResource;
+use App\Http\Requests\ForgotPassordFromApi;
+use App\Http\Requests\ValidateProfileEditAPi;
+use App\Http\Requests\ChangePasswordApiRequest;
+use App\Http\Requests\RegisterValidaterFromAPi;
+use App\Http\Requests\ResetPasswordFromAPiRequest;
+use App\Http\Requests\ApiLoginValidationParameters;
+use App\Http\Resources\Admin\RoleResource as AdminRoleResource;
 
 use function random_int;
 
@@ -36,10 +37,10 @@ class AuthController extends Controller
         }
     }
 
-    public function userTypes($id)
+    public function userTypes()
     {
         try {
-            $roles =  Role::where('show_in_website', 1)->where('parent_id', $id)->where('active', 'active')->get();
+            $roles =  Role::where('show_in_website', 1)->where('active', 'active')->get();
 
             return responseApi(200, 'data retrieve', AdminRoleResource::collection($roles), [], $item = null);
         } catch (Throwable $exception) {
@@ -192,6 +193,8 @@ class AuthController extends Controller
         try {
             DB::beginTransaction();
             // create user
+            $request['verified_at'] =   Carbon::now()->format(config('panel.date_format') . ' ' . config('panel.time_format'));
+
             $user = User::create($request->all());
             $user->roles()->sync($request->input('roles', []));
             if ($request->input('image', false)) {

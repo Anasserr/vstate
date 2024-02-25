@@ -104,6 +104,7 @@ class User extends Authenticatable implements HasMedia, JWTSubject
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
+
         self::created(function (self $user) {
             if (auth()->check()) {
                 $user->verified    = 1;
@@ -126,7 +127,7 @@ class User extends Authenticatable implements HasMedia, JWTSubject
                     $user->roles()->attach($registrationRole);
                 }
 
-                $user->notify(new VerifyUserNotification($user));
+                //     $user->notify(new VerifyUserNotification($user));
             }
         });
     }
